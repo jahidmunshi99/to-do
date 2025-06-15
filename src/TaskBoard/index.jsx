@@ -19,6 +19,7 @@ const TaskBoard = () => {
 
   const [showTask, setShowTask] = useState(defaultTaks);
   const [addTask, setAddTask] = useState(false);
+  const [taskToUpdate, setTaskToUpdate] = useState(null);
 
   function handleAddTask(saveNewTask) {
     console.log(saveNewTask);
@@ -26,9 +27,25 @@ const TaskBoard = () => {
     setAddTask(false);
   }
 
+  function handleEditTask(updateTask) {
+    setTaskToUpdate(updateTask);
+    setAddTask(true);
+  }
+
+  function handleClose() {
+    setTaskToUpdate(null);
+    setAddTask(false);
+  }
+
   return (
     <>
-      {addTask && <AddTaskModal onSave={handleAddTask} />}
+      {addTask && (
+        <AddTaskModal
+          onSave={handleAddTask}
+          taskToUpdate={taskToUpdate}
+          onClose={handleClose}
+        />
+      )}
       <section className="mb-20" id="tasks">
         <div className="container">
           {/**-- Search Box --*/}
@@ -38,7 +55,7 @@ const TaskBoard = () => {
           {/**-- Search Box Ends --*/}
           <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
             <TaskActions onAddTask={() => setAddTask(true)} />
-            <TaskList tasks={showTask} />
+            <TaskList tasks={showTask} onEdit={handleEditTask} />
           </div>
         </div>
       </section>
