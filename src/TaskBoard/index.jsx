@@ -1,28 +1,23 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import AddTaskModal from "./AddTaskModal";
 import SearchBox from "./SearchBox";
 import TaskActions from "./TaskActions";
 import TaskList from "./TaskList";
 
 const TaskBoard = () => {
-  const defaultTaks = [
-    {
-      id: crypto.randomUUID(),
-      clientId: "1520",
-      clientName: "Alicia Joychu",
-      title: "React Learning",
-      description:
-        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius incidunt magni voluptatibus fugiat ipsa laboriosam sequi mollitia expedita, quos recusandae eligendi perspiciatis voluptates ipsum fugit quia illo iste tempore qui?",
-      tags: ["web", "React", "Api"],
-      orderStatus: ["New"],
-      priority: "high",
-      isfevorite: true,
-    },
-  ];
-
-  const [showTask, setShowTask] = useState(defaultTaks);
+  const [showTask, setShowTask] = useState([]);
   const [addTask, setAddTask] = useState(false);
   const [taskToUpdate, setTaskToUpdate] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get("../data/data.json") // path relative to public folder
+      .then((res) => setShowTask(res.data))
+      .catch((err) => console.error(err));
+  }, []);
+
+  console.log(showTask);
 
   function handleAddEditTask(saveNewTask) {
     console.log(saveNewTask);
@@ -49,10 +44,10 @@ const TaskBoard = () => {
           onClose={handleClose}
         />
       )}
-      <section className="mb-20" id="tasks">
+      <section className="py-25" id="tasks">
         <div className="container">
           {/**-- Search Box --*/}
-          <div className="p-2 flex justify-end">
+          <div className="py-5 flex justify-end">
             <SearchBox />
           </div>
           {/**-- Search Box Ends --*/}

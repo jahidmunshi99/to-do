@@ -1,12 +1,11 @@
 import Footer from "./Components/Footer";
 import Header from "./Components/Header/index";
-import HeroSection from "./Components/HeroSection";
 import TaskBoard from "./TaskBoard";
 function App() {
   return (
-    <div className="bg-[#191D26] font-[Inter] text-white">
+    <div className="bg-[#191D26] font-[Inter] min-h-screen text-white">
       <Header />
-      <HeroSection />
+      {/* <HeroSection /> */}
       <TaskBoard />
       <Footer />
     </div>

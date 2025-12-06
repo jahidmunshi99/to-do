@@ -1,4 +1,7 @@
+import { FaEdit } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
+import { IoEyeOutline } from "react-icons/io5";
+import { MdDeleteForever } from "react-icons/md";
 
 const TaskList = ({ tasks, onEdit }) => {
   return (
@@ -8,28 +11,30 @@ const TaskList = ({ tasks, onEdit }) => {
         <table className="table-fixed w-full">
           <thead className="bg-gray-950/10">
             <tr>
-              <th className="p-4 pb-6 text-sm font-semibold w-[2%] text-left"></th>
-
-              <th className="text-sm font-semibold w-[10%] text-center">ID</th>
-
-              <th className="text-sm font-semibold w-[15%] text-left">Name</th>
-
-              <th className="text-sm font-semibold w-[20%] text-left">Title</th>
-
-              <th className="text-sm font-semibold w-[20%] text-center">
-                Type
+              <th className="p-4 text-sm font-semibold w-[2%] text-left"></th>
+              <th className="p-4 text-sm font-semibold w-[8%] text-center">
+                ID
               </th>
-
-              <th className="text-sm font-semibold w-[10%] text-center">
-                Order Status
+              <th className="p-4 text-sm font-semibold w-[10%] text-left">
+                Name
               </th>
-
-              <th className="text-sm font-semibold w-[10%] text-center">
-                Priority
+              <th className="p-4 text-sm font-semibold w-[15%] text-left">
+                Title
               </th>
-
-              <th className="text-sm font-semibold w-[20%] text-center">
-                Options
+              <th className="p-4 text-sm font-semibold w-[10%] text-center">
+                Order Type
+              </th>
+              <th className="p-4 text-sm font-semibold w-[10%] text-center">
+                Status
+              </th>
+              <th className="p-4 text-sm font-semibold w-[10%] text-center">
+                Author
+              </th>
+              <th className="p-4 text-sm font-semibold w-[20%] text-center">
+                Delivery File
+              </th>
+              <th className="p-4 text-sm font-semibold w-[10%] text-center">
+                Actions
               </th>
             </tr>
           </thead>
@@ -51,10 +56,11 @@ const TaskList = ({ tasks, onEdit }) => {
 
                 <td className="text-center">{task.clientId}</td>
                 <td className="text-left">{task.clientName}</td>
-
                 <td className="text-left">{task.title}</td>
-
-                <td className="text-left">
+                <td className="text-center">{task.orderType}</td>
+                <td className="text-center">{task.orderStatus}</td>
+                <td className="text-center">{task.author}</td>
+                <td>
                   <ul className="flex justify-center gap-1.5 flex-wrap">
                     {task.tags.map((tag) => (
                       <li key={tag}>
@@ -66,20 +72,20 @@ const TaskList = ({ tasks, onEdit }) => {
                   </ul>
                 </td>
 
-                <td className="text-center">{task.orderStatus}</td>
-
-                <td className="text-center">{task.priority}</td>
-
                 <td>
-                  <div className="flex items-center justify-center space-x-3">
-                    <button className="text-[#00D991]">View</button>
+                  <div className="flex items-center justify-center gap-4">
+                    <button className="text-[#00D991]">
+                      <IoEyeOutline className="text-xl" />
+                    </button>
                     <button
                       className="text-blue-500"
                       onClick={() => onEdit(task)}
                     >
-                      Edit
+                      <FaEdit className="text-xl" />
                     </button>
-                    <button className="text-red-500">Delete</button>
+                    <button className="text-red-500">
+                      <MdDeleteForever className="text-xl" />
+                    </button>
                   </div>
                 </td>
               </tr>

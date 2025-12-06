@@ -35,9 +35,38 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
 
         {/**-- inputs -- */}
         <div className="space-y-9 text-white lg:space-y-10">
+          <div className="flex justify-between items-center gap-5">
+            {/**-- Clients ID -- */}
+            <div className="space-y-2 lg:space-y-3">
+              <label htmlFor="title">Client Number</label>
+              <input
+                className="block w-full rounded-md bg-[#2D323F] px-3 py-2.5"
+                type="text"
+                name="title"
+                id="title"
+                value={task.title}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            {/**-- Client Name -- */}
+            <div className="space-y-2 lg:space-y-3">
+              <label htmlFor="title">Client Name</label>
+              <input
+                className="block w-full rounded-md bg-[#2D323F] px-3 py-2.5"
+                type="text"
+                name="title"
+                id="title"
+                value={task.title}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+
           {/**-- title -- */}
           <div className="space-y-2 lg:space-y-3">
-            <label htmlFor="title">Title</label>
+            <label htmlFor="title">Job Title</label>
             <input
               className="block w-full rounded-md bg-[#2D323F] px-3 py-2.5"
               type="text"
@@ -50,7 +79,7 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
           </div>
           {/**-- description -- */}
           <div className="space-y-2 lg:space-y-3">
-            <label htmlFor="description">Description</label>
+            <label htmlFor="description">Message</label>
             <textarea
               className="block min-h-[120px] w-full rounded-md bg-[#2D323F] px-3 py-2.5 lg:min-h-[180px]"
               type="text"
@@ -61,11 +90,74 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
               required
             ></textarea>
           </div>
+          <div className="flex justify-between items-center gap-5">
+            {/**-- Budget -- */}
+            <div className="space-y-2 lg:space-y-3 w-[20%]">
+              <label htmlFor="title">Budget</label>
+              <input
+                className="block w-full rounded-md bg-[#2D323F] px-3 py-2.5"
+                type="text"
+                name="title"
+                id="title"
+                value={task.title}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            {/**-- Delivery Date -- */}
+            <div className="space-y-2 lg:space-y-3 w-[30%]">
+              <label htmlFor="deliveryDate">Delivery Date</label>
+              <input
+                className="block w-full rounded-md bg-[#2D323F] px-3 py-2.5 text-white"
+                type="date"
+                name="deliveryDate"
+                id="deliveryDate"
+                value={task.deliveryDate}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            {/**-- Order Type -- */}
+            <div className="space-y-2 lg:space-y-3 w-[35%]">
+              <label htmlFor="priority">Order Type</label>
+              <select
+                className="block w-full cursor-pointer rounded-md bg-[#2D323F] px-3 py-2.5"
+                name="priority"
+                id="priority"
+                value={task.priority}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Type</option>
+                <option value="Low">New Order</option>
+                <option value="Medium">Revision</option>
+                <option value="High">Support</option>
+              </select>
+            </div>
+
+            {/**-- Order Priority -- */}
+            <div className="space-y-2 lg:space-y-3 w-[15%]">
+              <label htmlFor="priority">Priority</label>
+              <select
+                className="block w-full cursor-pointer rounded-md bg-[#2D323F] px-3 py-2.5"
+                name="priority"
+                id="priority"
+                value={task.priority}
+                onChange={handleChange}
+                required
+              >
+                <option value="Low">1</option>
+                <option value="Medium">2</option>
+                <option value="High">3</option>
+              </select>
+            </div>
+          </div>
           {/**-- input group -- */}
           <div className="grid-cols-2 gap-x-4 max-md:space-y-9 md:grid lg:gap-x-10 xl:gap-x-20">
-            {/**-- tags -- */}
+            {/**-- Delivery File -- */}
             <div className="space-y-2 lg:space-y-3">
-              <label htmlFor="tags">Tags</label>
+              <label htmlFor="tags">Delivery File</label>
               <input
                 className="block w-full rounded-md bg-[#2D323F] px-3 py-2.5"
                 type="text"
@@ -76,9 +168,9 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
                 required
               />
             </div>
-            {/**-- priority -- */}
+            {/**-- Team Member -- */}
             <div className="space-y-2 lg:space-y-3">
-              <label htmlFor="priority">Priority</label>
+              <label htmlFor="priority">Team Member</label>
               <select
                 className="block w-full cursor-pointer rounded-md bg-[#2D323F] px-3 py-2.5"
                 name="priority"
@@ -88,9 +180,9 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
                 required
               >
                 <option value="">Select Priority</option>
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
+                <option value="Low">1. Imran Hossain</option>
+                <option value="Medium">2. Mehedi Hasan</option>
+                <option value="High">3. Ferdousi Akter</option>
               </select>
             </div>
           </div>
