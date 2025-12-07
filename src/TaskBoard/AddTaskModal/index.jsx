@@ -2,12 +2,18 @@ import { useState } from "react";
 const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
   const [task, setTask] = useState(
     taskToUpdate || {
-      id: crypto.randomUUID(),
-      title: "",
-      description: "",
+      // id: crypto.randomUUID,
+      clientId: "",
+      client_name: "",
+      project_title: "",
+      details: "",
       tags: [],
-      priority: "",
-      isfevorite: false,
+      budget: "",
+      delivery_date: "",
+      orderStatus: [],
+      orderType: [],
+      author: [],
+      isfevorite: true,
     }
   );
 
@@ -41,10 +47,10 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
               <label htmlFor="title">Client Number</label>
               <input
                 className="block w-full rounded-md bg-[#2D323F] px-3 py-2.5"
-                type="text"
-                name="title"
-                id="title"
-                value={task.title}
+                type="number"
+                name="clientId"
+                id="clientId"
+                value={task.clientId}
                 onChange={handleChange}
                 required
               />
@@ -55,9 +61,9 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
               <input
                 className="block w-full rounded-md bg-[#2D323F] px-3 py-2.5"
                 type="text"
-                name="title"
-                id="title"
-                value={task.title}
+                name="client_name"
+                id="client_name"
+                value={task.client_name}
                 onChange={handleChange}
                 required
               />
@@ -70,9 +76,9 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
             <input
               className="block w-full rounded-md bg-[#2D323F] px-3 py-2.5"
               type="text"
-              name="title"
-              id="title"
-              value={task.title}
+              name="project_title"
+              id="project_title"
+              value={task.project_title}
               onChange={handleChange}
               required
             />
@@ -83,9 +89,9 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
             <textarea
               className="block min-h-[120px] w-full rounded-md bg-[#2D323F] px-3 py-2.5 lg:min-h-[180px]"
               type="text"
-              name="description"
-              id="description"
-              value={task.description}
+              name="details"
+              id="details"
+              value={task.details}
               onChange={handleChange}
               required
             ></textarea>
@@ -97,9 +103,9 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
               <input
                 className="block w-full rounded-md bg-[#2D323F] px-3 py-2.5"
                 type="text"
-                name="title"
-                id="title"
-                value={task.title}
+                name="budget"
+                id="budget"
+                value={task.budget}
                 onChange={handleChange}
                 required
               />
@@ -110,9 +116,9 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
               <input
                 className="block w-full rounded-md bg-[#2D323F] px-3 py-2.5 text-white"
                 type="date"
-                name="deliveryDate"
+                name="delivery_date"
                 id="deliveryDate"
-                value={task.deliveryDate}
+                value={task.delivery_date}
                 onChange={handleChange}
                 required
               />
@@ -123,16 +129,16 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
               <label htmlFor="priority">Order Type</label>
               <select
                 className="block w-full cursor-pointer rounded-md bg-[#2D323F] px-3 py-2.5"
-                name="priority"
-                id="priority"
-                value={task.priority}
+                name="orderStatus"
+                id="orderStatus"
+                value={task.orderStatus}
                 onChange={handleChange}
                 required
               >
                 <option value="">Select Type</option>
-                <option value="Low">New Order</option>
-                <option value="Medium">Revision</option>
-                <option value="High">Support</option>
+                <option value="new order">New Order</option>
+                <option value="revision">Revision</option>
+                <option value="revision request">Support</option>
               </select>
             </div>
 
@@ -143,7 +149,7 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
                 className="block w-full cursor-pointer rounded-md bg-[#2D323F] px-3 py-2.5"
                 name="priority"
                 id="priority"
-                value={task.priority}
+                value={task.id}
                 onChange={handleChange}
                 required
               >
@@ -173,16 +179,16 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
               <label htmlFor="priority">Team Member</label>
               <select
                 className="block w-full cursor-pointer rounded-md bg-[#2D323F] px-3 py-2.5"
-                name="priority"
+                name="author"
                 id="priority"
-                value={task.priority}
+                value={task.author}
                 onChange={handleChange}
                 required
               >
                 <option value="">Select Priority</option>
-                <option value="Low">1. Imran Hossain</option>
-                <option value="Medium">2. Mehedi Hasan</option>
-                <option value="High">3. Ferdousi Akter</option>
+                <option value="1">1. Imran Hossain</option>
+                <option value="2">2. Mehedi Hasan</option>
+                <option value="3">3. Ferdousi Akter</option>
               </select>
             </div>
           </div>

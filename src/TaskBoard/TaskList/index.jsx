@@ -13,7 +13,7 @@ const TaskList = ({ tasks, onEdit }) => {
             <tr>
               <th className="p-4 text-sm font-semibold w-[2%] text-left"></th>
               <th className="p-4 text-sm font-semibold w-[8%] text-center">
-                ID
+                Client ID
               </th>
               <th className="p-4 text-sm font-semibold w-[10%] text-left">
                 Name
@@ -55,8 +55,8 @@ const TaskList = ({ tasks, onEdit }) => {
                 </td>
 
                 <td className="text-center">{task.clientId}</td>
-                <td className="text-left">{task.clientName}</td>
-                <td className="text-left">{task.title}</td>
+                <td className="text-left">{task.client_name}</td>
+                <td className="text-left">{task.project_title}</td>
                 <td className="text-center">{task.orderType}</td>
                 <td className="text-center">{task.orderStatus}</td>
                 <td className="text-center">{task.author}</td>

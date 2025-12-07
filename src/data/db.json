@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "jahidmunshi@gmail.com",
+      "use_name": "jahidmunshi",
+      "phone": "+8801717407216",
+      "display_name": "Nayem",
+      "role": "admin",
+      "createAt": "23-10-2025"
+    },
+    {
+      "id": "1",
+      "email": "jahidmunshi@gmail.com",
+      "use_name": "jahidmunshi",
+      "phone": "+8801717407216",
+      "display_name": "Nayem",
+      "role": "editor",
+      "createAt": "23-10-2025"
+    }
+  ],
+
+  "posts": [
+    {
+      "id": "1",
+      "clientId": "1520",
+      "client_name": "Alicia Joychu",
+      "project_title": "React Learning",
+      "details": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius incidunt magni voluptatibus fugiat ipsa laboriosam sequi mollitia expedita, quos recusandae eligendi perspiciatis voluptates ipsum fugit quia illo iste tempore qui?",
+      "tags": ["web", "React", "Api"],
+      "budget": "$50",
+      "delivery_date": "20/12/2025",
+      "orderStatus": ["pending"],
+      "role": ["editor"],
+      "orderType": ["new order"],
+      "author": ["nayem"],
+      "isfevorite": true
+    }
+  ]
+}

@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import { getPosts, getUsers } from "../FetchData/FetchData.js";
 import AddTaskModal from "./AddTaskModal";
 import SearchBox from "./SearchBox";
 import TaskActions from "./TaskActions";
@@ -7,14 +7,18 @@ import TaskList from "./TaskList";
 
 const TaskBoard = () => {
   const [showTask, setShowTask] = useState([]);
+  const [users, setUsers] = useState([]);
   const [addTask, setAddTask] = useState(false);
   const [taskToUpdate, setTaskToUpdate] = useState(null);
 
   useEffect(() => {
-    axios
-      .get("../data/data.json") // path relative to public folder
-      .then((res) => setShowTask(res.data))
-      .catch((err) => console.error(err));
+    const data = async () => {
+      const postData = await getPosts();
+      setShowTask(postData);
+      const usersData = await getUsers();
+      setUsers(usersData);
+    };
+    data();
   }, []);
 
   console.log(showTask);
