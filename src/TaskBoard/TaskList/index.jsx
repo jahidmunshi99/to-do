@@ -3,7 +3,7 @@ import { FaStar } from "react-icons/fa6";
 import { IoEyeOutline } from "react-icons/io5";
 import { MdDeleteForever } from "react-icons/md";
 
-const TaskList = ({ tasks, onEdit }) => {
+const TaskList = ({ tasks, onEdit, onView }) => {
   return (
     <div className="w-full">
       {/* Desktop / Tablet Table */}
@@ -58,7 +58,9 @@ const TaskList = ({ tasks, onEdit }) => {
                 <td className="text-left">{task.client_name}</td>
                 <td className="text-left">{task.project_title}</td>
                 <td className="text-center">{task.orderType}</td>
-                <td className="text-center">{task.orderStatus}</td>
+                <td className="text-center">
+                  {task.orderStatus ? "Pending" : "Delivered"}
+                </td>
                 <td className="text-center">{task.author}</td>
                 <td>
                   <ul className="flex justify-center gap-1.5 flex-wrap">
@@ -74,7 +76,10 @@ const TaskList = ({ tasks, onEdit }) => {
 
                 <td>
                   <div className="flex items-center justify-center gap-4">
-                    <button className="text-[#00D991]">
+                    <button
+                      className="text-[#00D991]"
+                      onClick={() => onView(task)}
+                    >
                       <IoEyeOutline className="text-xl" />
                     </button>
                     <button
@@ -130,8 +135,8 @@ const TaskList = ({ tasks, onEdit }) => {
             </div>
 
             <p className="text-sm mt-2">
-              <span className="font-semibold">Order Status:</span>{" "}
-              {task.orderStatus}
+              <span className="font-semibold">Order Status:</span>
+              {task.orderStatus ? "Pending" : "Delivered"}
             </p>
 
             <p className="text-sm mt-1">

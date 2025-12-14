@@ -30,7 +30,7 @@
       "tags": ["web", "React", "Api"],
       "budget": "$50",
       "delivery_date": "20/12/2025",
-      "orderStatus": ["pending"],
+      "orderStatus": true,
       "role": ["editor"],
       "orderType": ["new order"],
       "author": ["nayem"],

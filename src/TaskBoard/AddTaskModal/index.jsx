@@ -2,7 +2,7 @@ import { useState } from "react";
 const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
   const [task, setTask] = useState(
     taskToUpdate || {
-      // id: crypto.randomUUID,
+      id: crypto.randomUUID(),
       clientId: "",
       client_name: "",
       project_title: "",
@@ -10,7 +10,7 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
       tags: [],
       budget: "",
       delivery_date: "",
-      orderStatus: [],
+      orderStatus: true,
       orderType: [],
       author: [],
       isfevorite: true,
@@ -34,7 +34,7 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
   return (
     <>
       <div className="bg-gray-500/80 h-full w-full z-10 absolute top-0 left-0"></div>
-      <htmlForm className="mx-auto my-10 w-full max-w-[560px] rounded-xl border border-[#FEFBFB]/[36%] bg-[#191D26] p-9 max-md:px-4 lg:my-20 lg:p-11 z-10 absolute top-1/4 left-1/3">
+      <htmlFor className="mx-auto my-10 w-full max-w-[560px] rounded-xl border border-[#FEFBFB]/[36%] bg-[#191D26] p-9 max-md:px-4 lg:my-20 lg:p-11 z-10 absolute top-1/4 left-1/3">
         <h2 className="mb-9 text-center text-2xl font-bold text-white lg:mb-11 lg:text-[28px] ">
           {isNew ? "Add New Task" : "Edit Task"}
         </h2>
@@ -124,14 +124,14 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
               />
             </div>
 
-            {/**-- Order Type -- */}
+            {/**-- Order Status -- */}
             <div className="space-y-2 lg:space-y-3 w-[35%]">
               <label htmlFor="priority">Order Type</label>
               <select
                 className="block w-full cursor-pointer rounded-md bg-[#2D323F] px-3 py-2.5"
-                name="orderStatus"
-                id="orderStatus"
-                value={task.orderStatus}
+                name="orderType"
+                id="orderType"
+                value={task.orderType}
                 onChange={handleChange}
                 required
               >
@@ -180,15 +180,16 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
               <select
                 className="block w-full cursor-pointer rounded-md bg-[#2D323F] px-3 py-2.5"
                 name="author"
-                id="priority"
+                id="author"
                 value={task.author}
                 onChange={handleChange}
                 required
               >
-                <option value="">Select Priority</option>
-                <option value="1">1. Imran Hossain</option>
-                <option value="2">2. Mehedi Hasan</option>
-                <option value="3">3. Ferdousi Akter</option>
+                {["Admin", "Editor", "Manager"].map((item, index) => (
+                  <option key={index} value={item}>
+                    {item}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -205,12 +206,12 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
           <button
             type="submit"
             className="rounded bg-green-500! px-4 py-2 text-white transition-all hover:opacity-80"
-            onClick={() => onSave(task)}
+            onClick={() => onSave(task, isNew)}
           >
             {isNew ? "Save Task" : "Update Task"}
           </button>
         </div>
-      </htmlForm>
+      </htmlFor>
     </>
   );
 };

@@ -4,50 +4,69 @@ import AddTaskModal from "./AddTaskModal";
 import SearchBox from "./SearchBox";
 import TaskActions from "./TaskActions";
 import TaskList from "./TaskList";
+import ViewTaskModal from "./ViewTaskModal/index.jsx";
 
 const TaskBoard = () => {
-  const [showTask, setShowTask] = useState([]);
+  const [data, setData] = useState([]);
   const [users, setUsers] = useState([]);
-  const [addTask, setAddTask] = useState(false);
+  const [showTaskModal, setShowTaskModal] = useState(false);
   const [taskToUpdate, setTaskToUpdate] = useState(null);
+  const [showViewModal, setShowViewModal] = useState(null);
 
   useEffect(() => {
     const data = async () => {
       const postData = await getPosts();
-      setShowTask(postData);
+      setData(postData);
       const usersData = await getUsers();
       setUsers(usersData);
     };
     data();
   }, []);
 
-  console.log(showTask);
-
-  function handleAddEditTask(saveNewTask) {
-    console.log(saveNewTask);
-    setShowTask([...showTask, saveNewTask]);
-    setAddTask(false);
+  function handleAddTask(newTask, isNew) {
+    console.log(newTask);
+    if (isNew) {
+      setData([...data, newTask]);
+    } else {
+      setData(
+        data.map((task) => {
+          if (task.id === newTask.id) {
+            return newTask;
+          }
+          return task;
+        })
+      );
+    }
+    setTaskToUpdate(null);
+    setShowTaskModal(false);
+    console.log(data);
   }
 
-  function handleClickEditTask(updateTask) {
+  function handleEditTask(updateTask) {
     setTaskToUpdate(updateTask);
-    setAddTask(true);
+    setShowTaskModal(true);
   }
 
   function handleClose() {
     setTaskToUpdate(null);
-    setAddTask(false);
+    setShowTaskModal(false);
+    setShowViewModal(false);
+  }
+
+  function handleView() {
+    setShowViewModal(true);
   }
 
   return (
     <>
-      {addTask && (
+      {showTaskModal && (
         <AddTaskModal
-          onSave={handleAddEditTask}
+          onSave={handleAddTask}
           taskToUpdate={taskToUpdate}
           onClose={handleClose}
         />
       )}
+      {showViewModal && <ViewTaskModal onClose={handleClose} task={data} />}
       <section className="py-25" id="tasks">
         <div className="container">
           {/**-- Search Box --*/}
@@ -56,8 +75,12 @@ const TaskBoard = () => {
           </div>
           {/**-- Search Box Ends --*/}
           <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
-            <TaskActions onAddTask={() => setAddTask(true)} />
-            <TaskList tasks={showTask} onEdit={handleClickEditTask} />
+            <TaskActions onAddTask={() => setShowTaskModal(true)} />
+            <TaskList
+              tasks={data}
+              onEdit={handleEditTask}
+              onView={handleView}
+            />
           </div>
         </div>
       </section>

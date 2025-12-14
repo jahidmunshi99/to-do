@@ -7,10 +7,10 @@ const posts = [
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius incidunt magni voluptatibus fugiat ipsa laboriosam sequi mollitia expedita, quos recusandae eligendi perspiciatis voluptates ipsum fugit quia illo iste tempore qui?",
     tags: ["web", "React", "Api"],
-    orderStatus: ["pending"],
+    orderStatus: true,
     role: ["editor"],
     orderType: ["new order"],
-    author: ["nayem"],
+    author: ["nayem", "Faiaz"],
     isfevorite: true,
   },
 ];
