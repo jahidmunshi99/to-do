@@ -14,6 +14,8 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
       orderType: [],
       author: [],
       isfevorite: true,
+      createAt: new Date().toISOString().split("T")[0],
+      createdBy: "",
     }
   );
 

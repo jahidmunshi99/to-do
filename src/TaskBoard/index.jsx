@@ -1,5 +1,6 @@
+import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { getPosts, getUsers } from "../FetchData/FetchData.js";
+import db from "../Firebase/firebase.config.js";
 import AddTaskModal from "./AddTaskModal";
 import SearchBox from "./SearchBox";
 import TaskActions from "./TaskActions";
@@ -8,23 +9,34 @@ import ViewTaskModal from "./ViewTaskModal/index.jsx";
 
 const TaskBoard = () => {
   const [data, setData] = useState([]);
-  const [users, setUsers] = useState([]);
+  console.log(data);
+  // const [users, setUsers] = useState([]);
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [taskToUpdate, setTaskToUpdate] = useState(null);
   const [showViewModal, setShowViewModal] = useState(null);
 
   useEffect(() => {
-    const data = async () => {
-      const postData = await getPosts();
-      setData(postData);
-      const usersData = await getUsers();
-      setUsers(usersData);
+    const requestDb = async () => {
+      try {
+        const colRef = collection(db, "projects");
+        const snapshot = await getDocs(colRef);
+
+        const projects = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        setData(projects);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
-    data();
+
+    requestDb();
   }, []);
 
   function handleAddTask(newTask, isNew) {
-    console.log(newTask);
+    console.log(newTask.createAt);
     if (isNew) {
       setData([...data, newTask]);
     } else {
