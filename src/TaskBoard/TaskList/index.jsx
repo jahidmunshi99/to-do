@@ -110,7 +110,7 @@ const TaskList = ({ tasks, onEdit, onView }) => {
           >
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-sm font-semibold">
-                Client ID: {task.clientId}
+                Client ID: {task.client_id}
               </h3>
               {task.isfevorite ? (
                 <FaStar className="text-yellow-400" />
@@ -120,9 +120,9 @@ const TaskList = ({ tasks, onEdit, onView }) => {
             </div>
 
             <p className="text-sm">
-              <span className="font-semibold">Service Title:</span> {task.title}
+              <span className="font-semibold">Client Name:</span>{" "}
+              {task.client_name}
             </p>
-
             <div className="mt-2">
               <span className="font-semibold text-sm">Type:</span>
               <ul className="flex gap-1.5 flex-wrap mt-1">
