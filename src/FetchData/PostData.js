@@ -1,9 +1,9 @@
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import db from "../Firebase/firebase.config";
+import { db } from "../Firebase/firebase.config";
 
-const createPost = async (task) => {
+const createPost = async (newTask) => {
   const docRef = await addDoc(collection(db, "projects"), {
-    ...task,
+    ...newTask,
     created_at: serverTimestamp(),
   });
 

@@ -32,11 +32,10 @@ const ViewTaskModal = ({ task, onClose }) => {
           </h2>
 
           {/* Content */}
-
-          {task.map((item) => {
-            return (
-              <>
-                <div className="space-y-4 text-sm sm:space-y-6 mt-6">
+          <div className="space-y-4 text-sm sm:space-y-6 mt-6">
+            {task.map((item) => {
+              return (
+                <>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <Info label="Client Number" value={item.clientId} />
                     <Info label="Client Name" value={item.client_name} />
@@ -59,10 +58,10 @@ const ViewTaskModal = ({ task, onClose }) => {
                     <Info label="Priority" value={item.priority} />
                   </div>
                   <Info label="Delivery File" value={item.tags} />
-                </div>
-              </>
-            );
-          })}
+                </>
+              );
+            })}
+          </div>
 
           {/* Close Button */}
           <div className="mt-8 flex justify-center">

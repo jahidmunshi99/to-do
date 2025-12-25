@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getPosts } from "../FetchData/GetData";
+import { createPost } from "../FetchData/PostData.js";
 import AddTaskModal from "./AddTaskModal";
 import SearchBox from "./SearchBox";
 import TaskActions from "./TaskActions";
@@ -24,9 +25,9 @@ const TaskBoard = () => {
     requestDb();
   }, []);
 
-  function handleAddTask(newTask, isNew) {
-    console.log(newTask.createAt);
+  const handleAddTask = async (newTask, isNew) => {
     if (isNew) {
+      await createPost(newTask);
       setData([...data, newTask]);
     } else {
       setData(
@@ -41,18 +42,18 @@ const TaskBoard = () => {
     setTaskToUpdate(null);
     setShowTaskModal(false);
     console.log(data);
-  }
+  };
 
   function handleEditTask(updateTask) {
     setTaskToUpdate(updateTask);
     setShowTaskModal(true);
   }
 
-  function handleClose() {
+  const handleClose = () => {
     setTaskToUpdate(null);
     setShowTaskModal(false);
     setShowViewModal(false);
-  }
+  };
 
   function handleView() {
     setShowViewModal(true);

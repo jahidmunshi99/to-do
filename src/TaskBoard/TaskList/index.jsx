@@ -16,10 +16,10 @@ const TaskList = ({ tasks, onEdit, onView }) => {
               <th className="p-4 text-sm font-semibold w-[10%] text-center">
                 Client ID
               </th>
-              <th className="p-4 text-sm font-semibold w-[22%] text-left">
+              <th className="p-4 text-sm font-semibold w-[15%] text-left">
                 Customer Name
               </th>
-              <th className="p-4 text-sm font-semibold w-[15%] text-center">
+              <th className="p-4 text-sm font-semibold w-[22%] text-center">
                 Service Type
               </th>
               <th className="p-4 text-sm font-semibold w-[10%] text-left">
@@ -59,22 +59,21 @@ const TaskList = ({ tasks, onEdit, onView }) => {
 
                   <td className="text-center">{task.client_id}</td>
                   <td className="text-left">{task.client_name}</td>
-                  <td className="text-left">{task.project_title}</td>
-                  <td className="text-center">{task.orderType}</td>
-                  <td className="text-center">
-                    {task.orderStatus ? "Pending" : "Delivered"}
-                  </td>
-                  <td className="text-center">{task.author}</td>
                   <td>
                     <ul className="flex justify-center gap-1.5 flex-wrap">
                       <li>
                         <span className="inline-block h-5 whitespace-nowrap rounded-[45px] bg-[#00D991A1] px-2.5 text-sm capitalize text-[#F4F5F6]">
-                          Kindle
+                          Paperback
                         </span>
                       </li>
                     </ul>
                   </td>
-
+                  <td className="text-left">Fiverr</td>
+                  <td className="text-center">
+                    {task.orderStatus ? "Pending" : "Delivered"}
+                  </td>
+                  <td className="text-center">New</td>
+                  <td className="text-center">{task.created_at}</td>
                   <td>
                     <div className="flex items-center justify-center gap-4">
                       <button
