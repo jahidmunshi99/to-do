@@ -4,34 +4,36 @@ import { IoEyeOutline } from "react-icons/io5";
 import { MdDeleteForever } from "react-icons/md";
 
 const TaskList = ({ tasks, onEdit, onView }) => {
+  console.log(tasks);
   return (
     <div className="w-full">
       {/* Desktop / Tablet Table */}
       <div className="hidden md:block">
         <table className="table-fixed w-full">
-          <thead className="bg-gray-950/10">
+          <thead className="bg-white/5">
             <tr>
-              <th className="p-4 text-sm font-semibold w-[2%] text-left"></th>
-              <th className="p-4 text-sm font-semibold w-[8%] text-center">
+              <th className="p-4 text-sm font-semibold w-[3%] text-left">Sl</th>
+              <th className="p-4 text-sm font-semibold w-[10%] text-center">
                 Client ID
               </th>
+              <th className="p-4 text-sm font-semibold w-[22%] text-left">
+                Customer Name
+              </th>
+              <th className="p-4 text-sm font-semibold w-[15%] text-center">
+                Service Type
+              </th>
               <th className="p-4 text-sm font-semibold w-[10%] text-left">
-                Name
-              </th>
-              <th className="p-4 text-sm font-semibold w-[15%] text-left">
-                Title
-              </th>
-              <th className="p-4 text-sm font-semibold w-[10%] text-center">
-                Order Type
+                Platform
               </th>
               <th className="p-4 text-sm font-semibold w-[10%] text-center">
                 Status
               </th>
               <th className="p-4 text-sm font-semibold w-[10%] text-center">
-                Author
+                Client Category
               </th>
-              <th className="p-4 text-sm font-semibold w-[20%] text-center">
-                Delivery File
+
+              <th className="p-4 text-sm font-semibold w-[10%] text-center">
+                Delivery Date
               </th>
               <th className="p-4 text-sm font-semibold w-[10%] text-center">
                 Actions
@@ -40,61 +42,61 @@ const TaskList = ({ tasks, onEdit, onView }) => {
           </thead>
 
           <tbody>
-            {tasks.map((task) => (
-              <tr
-                key={task.id}
-                className="border-b border-[#2E3443] [&>td]:align-top [&>td]:px-4 [&>td]:py-2"
-              >
-                {/* Favorite Icon */}
-                <td className="text-left">
-                  {task.isfevorite ? (
-                    <FaStar className="text-yellow-400" />
-                  ) : (
-                    <FaStar className="text-gray-400" />
-                  )}
-                </td>
+            {tasks.map((task, index) => {
+              return (
+                <tr
+                  key={index}
+                  className="border-b border-[#2E3443] [&>td]:align-top [&>td]:px-4 [&>td]:py-2"
+                >
+                  {/* Favorite Icon */}
+                  <td className="text-left">
+                    {task.isfevorite ? (
+                      <FaStar className="text-yellow-400" />
+                    ) : (
+                      <FaStar className="text-gray-400" />
+                    )}
+                  </td>
 
-                <td className="text-center">{task.clientId}</td>
-                <td className="text-left">{task.client_name}</td>
-                <td className="text-left">{task.project_title}</td>
-                <td className="text-center">{task.orderType}</td>
-                <td className="text-center">
-                  {task.orderStatus ? "Pending" : "Delivered"}
-                </td>
-                <td className="text-center">{task.author}</td>
-                <td>
-                  <ul className="flex justify-center gap-1.5 flex-wrap">
-                    {task.tags.map((tag) => (
-                      <li key={tag}>
+                  <td className="text-center">{task.client_id}</td>
+                  <td className="text-left">{task.client_name}</td>
+                  <td className="text-left">{task.project_title}</td>
+                  <td className="text-center">{task.orderType}</td>
+                  <td className="text-center">
+                    {task.orderStatus ? "Pending" : "Delivered"}
+                  </td>
+                  <td className="text-center">{task.author}</td>
+                  <td>
+                    <ul className="flex justify-center gap-1.5 flex-wrap">
+                      <li>
                         <span className="inline-block h-5 whitespace-nowrap rounded-[45px] bg-[#00D991A1] px-2.5 text-sm capitalize text-[#F4F5F6]">
-                          {tag}
+                          Kindle
                         </span>
                       </li>
-                    ))}
-                  </ul>
-                </td>
+                    </ul>
+                  </td>
 
-                <td>
-                  <div className="flex items-center justify-center gap-4">
-                    <button
-                      className="text-[#00D991]"
-                      onClick={() => onView(task)}
-                    >
-                      <IoEyeOutline className="text-xl" />
-                    </button>
-                    <button
-                      className="text-blue-500"
-                      onClick={() => onEdit(task)}
-                    >
-                      <FaEdit className="text-xl" />
-                    </button>
-                    <button className="text-red-500">
-                      <MdDeleteForever className="text-xl" />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
+                  <td>
+                    <div className="flex items-center justify-center gap-4">
+                      <button
+                        className="text-[#00D991]"
+                        onClick={() => onView(task)}
+                      >
+                        <IoEyeOutline className="text-xl" />
+                      </button>
+                      <button
+                        className="text-blue-500"
+                        onClick={() => onEdit(task)}
+                      >
+                        <FaEdit className="text-xl" />
+                      </button>
+                      <button className="text-red-500">
+                        <MdDeleteForever className="text-xl" />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
@@ -124,13 +126,11 @@ const TaskList = ({ tasks, onEdit, onView }) => {
             <div className="mt-2">
               <span className="font-semibold text-sm">Type:</span>
               <ul className="flex gap-1.5 flex-wrap mt-1">
-                {task.tags.map((tag) => (
-                  <li key={tag}>
-                    <span className="inline-block h-5 whitespace-nowrap rounded-[45px] bg-[#00D991A1] px-2.5 text-sm capitalize text-[#F4F5F6]">
-                      {tag}
-                    </span>
-                  </li>
-                ))}
+                <li>
+                  <span className="inline-block h-5 whitespace-nowrap rounded-[45px] bg-[#00D991A1] px-2.5 text-sm capitalize text-[#F4F5F6]">
+                    Kindle
+                  </span>
+                </li>
               </ul>
             </div>
 

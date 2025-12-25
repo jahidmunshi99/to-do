@@ -1,6 +1,5 @@
-import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import db from "../Firebase/firebase.config.js";
+import { getPosts } from "../FetchData/GetData";
 import AddTaskModal from "./AddTaskModal";
 import SearchBox from "./SearchBox";
 import TaskActions from "./TaskActions";
@@ -9,8 +8,6 @@ import ViewTaskModal from "./ViewTaskModal/index.jsx";
 
 const TaskBoard = () => {
   const [data, setData] = useState([]);
-  console.log(data);
-  // const [users, setUsers] = useState([]);
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [taskToUpdate, setTaskToUpdate] = useState(null);
   const [showViewModal, setShowViewModal] = useState(null);
@@ -18,20 +15,12 @@ const TaskBoard = () => {
   useEffect(() => {
     const requestDb = async () => {
       try {
-        const colRef = collection(db, "projects");
-        const snapshot = await getDocs(colRef);
-
-        const projects = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
-        setData(projects);
+        const fethPosts = await getPosts();
+        setData(...data, fethPosts);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
     requestDb();
   }, []);
 
