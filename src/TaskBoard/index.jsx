@@ -1,5 +1,5 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
-import { getPosts } from "../FetchData/GetData";
 import { createPost } from "../FetchData/PostData.js";
 import AddTaskModal from "./AddTaskModal";
 import SearchBox from "./SearchBox";
@@ -16,8 +16,8 @@ const TaskBoard = () => {
   useEffect(() => {
     const requestDb = async () => {
       try {
-        const fethPosts = await getPosts();
-        setData(...data, fethPosts);
+        const res = await axios.get("https://phdb-api.onrender.com/posts");
+        setData(res.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -26,9 +26,10 @@ const TaskBoard = () => {
   }, []);
 
   const handleAddTask = async (newTask, isNew) => {
+    console.log(newTask);
     if (isNew) {
-      await createPost(newTask);
-      setData([...data, newTask]);
+      const res = await createPost(newTask);
+      setData((prev) => [...prev, res.data]);
     } else {
       setData(
         data.map((task) => {
@@ -41,7 +42,6 @@ const TaskBoard = () => {
     }
     setTaskToUpdate(null);
     setShowTaskModal(false);
-    console.log(data);
   };
 
   function handleEditTask(updateTask) {

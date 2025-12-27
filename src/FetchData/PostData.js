@@ -1,13 +1,12 @@
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "../Firebase/firebase.config";
-
+import axios from "axios";
 const createPost = async (newTask) => {
-  const docRef = await addDoc(collection(db, "projects"), {
-    ...newTask,
-    created_at: serverTimestamp(),
+  const res = await axios.post("https://phdb-api.onrender.com/posts", newTask, {
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
 
-  return docRef.id;
+  return res;
 };
 
 export { createPost };

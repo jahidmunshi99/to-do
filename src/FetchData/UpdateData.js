@@ -1,12 +1,11 @@
-import db, { doc, updateDoc } from "../Firebase/firebase.config";
-const updatePost = async (task) => {
-  const { id, ...rest } = task;
-  const updateRef = doc(db, "projects", id);
-  try {
-    await updateDoc(updateRef, rest);
-  } catch (error) {
-    console.log(error);
-  }
-};
+import axios from "axios";
+const updatePost = async (newTask) => {
+  const res = await axios.post("https://phdb-api.onrender.com/posts", newTask, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
+  return res;
+};
 export { updatePost };

@@ -4,7 +4,6 @@ import { IoEyeOutline } from "react-icons/io5";
 import { MdDeleteForever } from "react-icons/md";
 
 const TaskList = ({ tasks, onEdit, onView }) => {
-  console.log(tasks);
   return (
     <div className="w-full">
       {/* Desktop / Tablet Table */}
@@ -73,7 +72,7 @@ const TaskList = ({ tasks, onEdit, onView }) => {
                     {task.orderStatus ? "Pending" : "Delivered"}
                   </td>
                   <td className="text-center">New</td>
-                  <td className="text-center">{task.created_at}</td>
+                  <td className="text-center">{task.delivery_date}</td>
                   <td>
                     <div className="flex items-center justify-center gap-4">
                       <button
