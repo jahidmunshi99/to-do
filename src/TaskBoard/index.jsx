@@ -9,7 +9,7 @@ import AddTaskModal from "./AddTaskModal";
 import SearchBox from "./SearchBox";
 import TaskActions from "./TaskActions";
 import TaskList from "./TaskList";
-import ViewTaskModal from "./ViewTaskModal/index.jsx";
+import ViewTaskModal from "./ViewTaskModal/index#1.jsx";
 
 const TaskBoard = () => {
   const [data, setData] = useState([]);
@@ -17,7 +17,7 @@ const TaskBoard = () => {
   const [taskToUpdate, setTaskToUpdate] = useState(null);
   const [showViewModal, setShowViewModal] = useState(null);
   const [message, setMessage] = useState({ error: false, message: "" });
-  const [sign, setSignIn] = useState(true);
+  const [sign, setSignIn] = useState(false);
 
   useEffect(() => {
     const requestDb = async () => {
