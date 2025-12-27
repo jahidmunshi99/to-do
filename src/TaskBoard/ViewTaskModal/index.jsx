@@ -1,81 +1,108 @@
-const Info = ({ label, value, multiline = false }) => (
-  <div>
-    <p className="mb-1 text-xs font-semibold text-gray-400">{label}</p>
-    <div
-      className={`rounded-md bg-[#2D323F] px-3 py-2 ${
-        multiline ? "min-h-[80px]" : ""
-      }`}
-    >
-      {value || "—"}
-    </div>
-  </div>
-);
-
-const ViewTaskModal = ({ task, onClose }) => {
-  console.log(task);
-  if (!task) return null;
-
+const viewTaskModal = () => {
   return (
     <>
-      {/* Overlay */}
-      <div
-        className="fixed inset-0 bg-gray-700/90 z-40"
-        onClick={onClose}
-      ></div>
+      <div class="container mx-auto">
+        <h1 class="text-2xl font-bold mb-6 text-center">
+          Client Orders Overview
+        </h1>
 
-      {/* Modal Container */}
-      <div className="fixed inset-0 z-50 flex items-start justify-center overflow-auto sm:items-center pt-5">
-        {/* Modal */}
-        <div className="mt-10 sm:mt-0 w-full max-w-[760px] rounded-xl border border-[#FEFBFB]/[36%] bg-[#191D26] p-6 sm:p-9">
-          <h2 className="mb-6 text-center text-2xl font-bold sm:mb-8 sm:text-3xl">
-            Project Details
-          </h2>
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-gray-700 border border-gray-200 rounded-lg">
+            <thead class="bg-gray-500">
+              <tr>
+                <th class="px-4 py-2 text-left text-sm font-semibold">Sl</th>
+                <th class="px-4 py-2 text-left text-sm font-semibold">
+                  Service Type
+                </th>
+                <th class="px-4 py-2 text-left text-sm font-semibold">
+                  Order Status
+                </th>
+                <th class="px-4 py-2 text-left text-sm font-semibold">
+                  Deliverd File
+                </th>
+                <th class="px-4 py-2 text-left text-sm font-semibold">
+                  Platform
+                </th>
+                <th class="px-4 py-2 text-left text-sm font-semibold">
+                  Budget ($)
+                </th>
+                <th class="px-4 py-2 text-left text-sm font-semibold">
+                  Delivery Date
+                </th>
+                <th class="px-4 py-2 text-left text-sm font-semibold">
+                  Task By
+                </th>
+                <th class="px-4 py-2 text-left text-sm font-semibold">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              {/* <!-- Current Client Row --> */}
+              <tr class="bg-cyan-800 hover:bg-cyan-600">
+                <td class="px-4 py-2">01</td>
+                <td class="px-4 py-2">Book Formatting</td>
+                <td class="px-4 py-2">Completed</td>
+                <td class="px-4 py-2">
+                  Paperback, Kindle, epub, Cover formatting
+                </td>
+                <td class="px-4 py-2">Fiverr</td>
+                <td class="px-4 py-2">$500</td>
+                <td class="px-4 py-2">12-12-2025</td>
+                <td class="px-4 py-2">Nayem</td>
+                <td class="px-4 py-2">
+                  <button
+                    onclick="toggleHistory('history-01')"
+                    class="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700"
+                  >
+                    View History
+                  </button>
+                </td>
+              </tr>
 
-          {/* Content */}
-          <div className="space-y-4 text-sm sm:space-y-6 mt-6">
-            {task.map((item) => {
-              return (
-                <>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <Info label="Client Number" value={item.clientId} />
-                    <Info label="Client Name" value={item.client_name} />
+              {/* <!-- Previous Records (Collapsed by default) --> */}
+              <tr id="history-01" class="hidden bg-gray-50">
+                <td colspan="10" class="px-4 py-2">
+                  <div class="space-y-2">
+                    <div class="p-2 bg-gray-100 rounded shadow-sm">
+                      <p class="text-sm">
+                        <strong>Previous Task 1:</strong> Book formatting for
+                        Amazon KDP
+                      </p>
+                      <p class="text-sm">
+                        <strong>Platform:</strong> Fiverr
+                      </p>
+                      <p class="text-sm">
+                        <strong>Budget:</strong> $100
+                      </p>
+                      <p class="text-sm">
+                        <strong>Delivery Date:</strong> 10-12-2025
+                      </p>
+                    </div>
+                    <div class="p-2 bg-gray-100 rounded shadow-sm">
+                      <p class="text-sm">
+                        <strong>Previous Task 2:</strong> Kindle formatting
+                      </p>
+                      <p class="text-sm">
+                        <strong>Platform:</strong> Fiverr
+                      </p>
+                      <p class="text-sm">
+                        <strong>Budget:</strong> $150
+                      </p>
+                      <p class="text-sm">
+                        <strong>Delivery Date:</strong> 08-12-2025
+                      </p>
+                    </div>
+                    {/* <!-- Add more previous tasks dynamically --> */}
                   </div>
-                  <Info label="Job Title" value={item.project_title} />
-                  <Info label="Message" value={item.details} multiline />
-                  {/* Budget & Date */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <Info label="Budget" value={item.budget} />
-                    <Info label="Delivery Date" value={item.delivery_date} />
-                    <Info
-                      label="Order Status"
-                      value={item.orderStatus ? "Pending" : "Delivered"}
-                    />
-                  </div>
-                  {/* Order Info */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <Info label="Order Type" value={item.orderType} />
-                    <Info label="Team Member" value={item.author} />
-                    <Info label="Priority" value={item.priority} />
-                  </div>
-                  <Info label="Delivery File" value={item.tags} />
-                </>
-              );
-            })}
-          </div>
-
-          {/* Close Button */}
-          <div className="mt-8 flex justify-center">
-            <button
-              onClick={onClose}
-              className="rounded bg-red-500 px-6 py-2 text-white font-semibold hover:opacity-80 transition"
-            >
-              Close
-            </button>
-          </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </>
   );
 };
 
-export default ViewTaskModal;
+export default viewTaskModal;

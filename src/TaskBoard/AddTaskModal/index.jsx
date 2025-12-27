@@ -25,7 +25,7 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
   function handleChange(e) {
     const name = e.target.name;
     let value = e.target.value;
-    if (name === "tags") {
+    if (name === "delivery_file") {
       value = value.split(",");
     }
 

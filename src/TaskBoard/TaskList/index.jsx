@@ -1,5 +1,4 @@
 import { FaEdit } from "react-icons/fa";
-import { FaStar } from "react-icons/fa6";
 import { IoEyeOutline } from "react-icons/io5";
 import { MdDeleteForever } from "react-icons/md";
 
@@ -48,7 +47,7 @@ const TaskList = ({ tasks, onEdit, onView, onDelete }) => {
                   className="border-b border-[#2E3443] [&>td]:align-top [&>td]:px-4 [&>td]:py-2"
                 >
                   {/* Favorite Icon */}
-                  <td className="text-left">{task.id}</td>
+                  <td className="text-left">{index + 1}</td>
 
                   <td className="text-center">{task.client_id}</td>
                   <td className="text-left">{task.client_name}</td>
@@ -108,39 +107,40 @@ const TaskList = ({ tasks, onEdit, onView, onDelete }) => {
               <h3 className="text-sm font-semibold">
                 Client ID: {task.client_id}
               </h3>
-              {task.isfevorite ? (
-                <FaStar className="text-yellow-400" />
-              ) : (
-                <FaStar className="text-gray-400" />
-              )}
             </div>
 
-            <p className="text-sm">
-              <span className="font-semibold">Client Name:</span>{" "}
+            <p className="text-sm my-2">
+              <span className="font-semibold capitalize">Client Name:</span>{" "}
               {task.client_name}
             </p>
-            <div className="mt-2">
-              <span className="font-semibold text-sm">Type:</span>
-              <ul className="flex gap-1.5 flex-wrap mt-1">
-                <li>
-                  <span className="inline-block h-5 whitespace-nowrap rounded-[45px] bg-[#00D991A1] px-2.5 text-sm capitalize text-[#F4F5F6]">
-                    Kindle
-                  </span>
-                </li>
+            <div className="flex items-center gap-2 my-2">
+              <span className="font-semibold text-sm whitespace-nowrap">
+                Type:
+              </span>
+
+              <ul className="flex gap-1.5 overflow-x-auto whitespace-nowrap">
+                {task.delivery_file.map((item, index) => (
+                  <li key={index}>
+                    <span className="h-5 inline-flex items-center rounded-[45px] bg-[#00D991A1] px-2.5 text-sm capitalize text-[#F4F5F6] whitespace-nowrap">
+                      {item}
+                    </span>
+                  </li>
+                ))}
               </ul>
             </div>
 
-            <p className="text-sm mt-2">
-              <span className="font-semibold">Order Status:</span>
-              {task.orderStatus ? "Pending" : "Delivered"}
+            <p className="text-sm my-2">
+              <span className="font-semibold capitalize">Order Status:</span>{" "}
+              {task.order_status}
             </p>
 
             <p className="text-sm mt-1">
-              <span className="font-semibold">Priority:</span> {task.priority}
+              <span className="font-semibold capitalize">Delivery Date:</span>{" "}
+              {task.delivery_date}
             </p>
 
-            <div className="flex items-center justify-end space-x-3 mt-4">
-              <button className="text-blue-500" onClick={() => onEdit(task)}>
+            <div className="flex items-center justify-end space-x-3 mt-2 gap-3">
+              <button className="text-blue-500 " onClick={() => onEdit(task)}>
                 Edit
               </button>
               <button className="text-red-500">Delete</button>
