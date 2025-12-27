@@ -106,7 +106,7 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
                 >
                   <option value="fiverr">Fiverr</option>
                   <option value="upwork">Upwork</option>
-                  <option value="fiverr">Direct</option>
+                  <option value="direct">Direct</option>
                 </select>
               </div>
 
@@ -118,9 +118,9 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
                   onChange={handleChange}
                   className="w-full rounded-md bg-[#2D323F] px-3 py-2.5"
                 >
-                  <option value="fiverr">Book Formatting</option>
-                  <option value="upwork">Cover Design</option>
-                  <option value="fiverr">Web Development</option>
+                  <option value="book formatting">Book Formatting</option>
+                  <option value="cover design">Cover Design</option>
+                  <option value="web development">Web Development</option>
                 </select>
               </div>
 
