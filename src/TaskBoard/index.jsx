@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { deletePost } from "../FetchData/DeleteData.js";
 import { createPost } from "../FetchData/PostData.js";
+import { updatePost } from "../FetchData/UpdateData.js";
 import AddTaskModal from "./AddTaskModal";
 import SearchBox from "./SearchBox";
 import TaskActions from "./TaskActions";
@@ -26,11 +28,11 @@ const TaskBoard = () => {
   }, []);
 
   const handleAddTask = async (newTask, isNew) => {
-    console.log(newTask);
     if (isNew) {
       const res = await createPost(newTask);
       setData((prev) => [...prev, res.data]);
     } else {
+      await updatePost(newTask.id, newTask);
       setData(
         data.map((task) => {
           if (task.id === newTask.id) {
@@ -53,6 +55,13 @@ const TaskBoard = () => {
     setTaskToUpdate(null);
     setShowTaskModal(false);
     setShowViewModal(false);
+  };
+
+  const handleDeltePost = async (postId) => {
+    await deletePost(postId);
+    const updateData = data.filter((item) => item.id !== postId);
+    console.log(updateData);
+    setData(updateData);
   };
 
   function handleView() {
@@ -82,6 +91,7 @@ const TaskBoard = () => {
               tasks={data}
               onEdit={handleEditTask}
               onView={handleView}
+              onDelete={handleDeltePost}
             />
           </div>
         </div>

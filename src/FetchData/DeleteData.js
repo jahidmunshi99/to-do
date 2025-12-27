@@ -1,14 +1,15 @@
-import { deleteDoc, doc } from "firebase/firestore";
-import db from "../Firebase/firebase.config";
+import axios from "axios";
+const deletePost = async (postId) => {
+  const res = await axios.delete(
+    `https://phdb-api.onrender.com/posts/${postId}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 
-const deletePost = async (taskId) => {
-  try {
-    const docRef = doc(db, "projects", taskId);
-    await deleteDoc(docRef);
-    console.log("Document deleted:", taskId);
-  } catch (error) {
-    console.error("Error deleting document:", error);
-  }
+  return res;
 };
 
 export { deletePost };

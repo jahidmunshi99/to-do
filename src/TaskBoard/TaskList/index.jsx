@@ -3,7 +3,7 @@ import { FaStar } from "react-icons/fa6";
 import { IoEyeOutline } from "react-icons/io5";
 import { MdDeleteForever } from "react-icons/md";
 
-const TaskList = ({ tasks, onEdit, onView }) => {
+const TaskList = ({ tasks, onEdit, onView, onDelete }) => {
   return (
     <div className="w-full">
       {/* Desktop / Tablet Table */}
@@ -87,7 +87,12 @@ const TaskList = ({ tasks, onEdit, onView }) => {
                       >
                         <FaEdit className="text-xl" />
                       </button>
-                      <button className="text-red-500">
+                      <button
+                        className="text-red-500"
+                        onClick={() => {
+                          onDelete(task.id);
+                        }}
+                      >
                         <MdDeleteForever className="text-xl" />
                       </button>
                     </div>
