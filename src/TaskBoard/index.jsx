@@ -137,7 +137,7 @@ const TaskBoard = () => {
         />
       )}
 
-      {!setSignIn && <SignModal />}
+      {!sign && <SignModal />}
       {showViewModal && <ViewTaskModal onClose={handleClose} task={data} />}
       <section className="py-25" id="tasks">
         <div className="container">

@@ -4,7 +4,10 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
     taskToUpdate || {
       client_id: "",
       client_name: "",
+      book_title: "",
+      author_name: "",
       client_email: "",
+      client_social_link: "",
       country: "",
       order_status: "",
       platform: "",
@@ -37,7 +40,7 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
   return (
     <>
       <div className="fixed inset-0 z-20 flex items-start justify-center bg-gray-500/80 overflow-y-auto">
-        <htmlFor className="relative mx-auto my-6 w-full max-w-[560px] rounded-xl border border-[#FEFBFB]/[36%] bg-[#191D26] p-6 md:p-9 lg:my-20 lg:p-11">
+        <htmlFor className="relative mx-auto my-6 w-full max-w-[700px] border- rounded-xl border border-[#FEFBFB]/[46%] bg-[#191D26] p-6 md:p-9 lg:my-20 lg:p-11">
           <h2 className="mb-6 text-center text-xl font-bold text-white md:text-2xl lg:mb-11 lg:text-[28px]">
             {isNew ? "Add New Task" : "Edit Task"}
           </h2>
@@ -46,7 +49,7 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
           <div className="space-y-6 text-white lg:space-y-10">
             {/* Row 1 */}
             <div className="flex flex-col gap-5 md:flex-row">
-              <div className="w-full space-y-2">
+              <div className="lg:w-[20%] md:w-full space-y-2">
                 <label>Customer ID</label>
                 <input
                   type="text"
@@ -57,7 +60,7 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
                 />
               </div>
 
-              <div className="w-full space-y-2">
+              <div className="lg:w-[50%] md:w-full space-y-2">
                 <label>Client's Name</label>
                 <input
                   type="text"
@@ -67,22 +70,7 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
                   className="w-full rounded-md bg-[#2D323F] px-3 py-2"
                 />
               </div>
-            </div>
-
-            {/* Row 2 */}
-            <div className="flex flex-col gap-5 md:flex-row">
-              <div className="w-full space-y-2">
-                <label>Email</label>
-                <input
-                  type="email"
-                  name="client_email"
-                  onChange={handleChange}
-                  value={task.client_email}
-                  className="w-full rounded-md bg-[#2D323F] px-3 py-2"
-                />
-              </div>
-
-              <div className="w-full space-y-2">
+              <div className="lg:w-[30%] md:w-full space-y-2">
                 <label>Country</label>
                 <input
                   type="text"
@@ -93,7 +81,6 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
                 />
               </div>
             </div>
-
             {/* Row 3 */}
             <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
               <div className="space-y-2">
@@ -214,6 +201,56 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
                   <option value="jahid munshi">Jahid Munshi</option>
                   <option value="faiaz ">Faiaz</option>
                 </select>
+              </div>
+            </div>
+
+            {/** Book Information */}
+            <div className="flex flex-col gap-5 md:flex-row">
+              <div className="w-full space-y-2">
+                <label>Book Title</label>
+                <input
+                  type="text"
+                  name="client_id"
+                  onChange={handleChange}
+                  value={task.client_id}
+                  className="w-full rounded-md bg-[#2D323F] px-3 py-2"
+                />
+              </div>
+
+              <div className="w-full space-y-2">
+                <label>Author Name</label>
+                <input
+                  type="text"
+                  name="client_name"
+                  onChange={handleChange}
+                  value={task.client_name}
+                  className="w-full rounded-md bg-[#2D323F] px-3 py-2"
+                />
+              </div>
+            </div>
+
+            {/* Row 2 */}
+            <div className="flex flex-col gap-5 md:flex-row">
+              <div className="w-full space-y-2">
+                <label>Email</label>
+                <input
+                  type="email"
+                  name="client_email"
+                  onChange={handleChange}
+                  value={task.client_email}
+                  className="w-full rounded-md bg-[#2D323F] px-3 py-2"
+                />
+              </div>
+
+              <div className="w-full space-y-2">
+                <label>Social Link</label>
+                <input
+                  type="text"
+                  name="client_social_link"
+                  onChange={handleChange}
+                  value={task.client_social_link}
+                  className="w-full rounded-md bg-[#2D323F] px-3 py-2"
+                />
               </div>
             </div>
 
