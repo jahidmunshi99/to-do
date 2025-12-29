@@ -9,6 +9,7 @@ import AddTaskModal from "./AddTaskModal";
 import SearchBox from "./SearchBox";
 import TaskActions from "./TaskActions";
 import TaskList from "./TaskList";
+import UserTaskList from "./TaskList/UserTaskList.jsx";
 import ViewTaskModal from "./ViewTaskModal/index#1.jsx";
 
 const TaskBoard = () => {
@@ -17,7 +18,7 @@ const TaskBoard = () => {
   const [taskToUpdate, setTaskToUpdate] = useState(null);
   const [showViewModal, setShowViewModal] = useState(null);
   const [message, setMessage] = useState({ error: false, message: "" });
-  const [sign, setSignIn] = useState(false);
+  const [sign, setSignIn] = useState(true);
 
   useEffect(() => {
     const requestDb = async () => {
@@ -154,6 +155,7 @@ const TaskBoard = () => {
               onView={handleView}
               onDelete={handleDeltePost}
             />
+            <UserTaskList />
           </div>
         </div>
       </section>
