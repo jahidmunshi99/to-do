@@ -8,7 +8,7 @@ import { updatePost } from "../FetchData/UpdateData.js";
 import AddTaskModal from "./AddTaskModal";
 import SearchBox from "./SearchBox";
 import TaskActions from "./TaskActions/index.jsx";
-import TaskList from "./TaskList/index.jsx";
+// import TaskList from "./TaskList/index.jsx";
 import UserTaskList from "./TaskList/UserTaskList.jsx";
 import ViewTaskModal from "./ViewTaskModal/index#1.jsx";
 
@@ -149,12 +149,12 @@ const TaskBoard = () => {
           {/**-- Search Box Ends --*/}
           <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
             <TaskActions onAddTask={() => setShowTaskModal(true)} />
-            <TaskList
+            {/* <TaskList
               tasks={data}
               onEdit={handleEditTask}
               onView={handleView}
               onDelete={handleDeltePost}
-            />
+            /> */}
             <UserTaskList
               tasks={data}
               onEdit={handleEditTask}
