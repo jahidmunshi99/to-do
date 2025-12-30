@@ -7,8 +7,8 @@ import { createPost } from "../FetchData/PostData.js";
 import { updatePost } from "../FetchData/UpdateData.js";
 import AddTaskModal from "./AddTaskModal";
 import SearchBox from "./SearchBox";
-import TaskActions from "./TaskActions";
-import TaskList from "./TaskList";
+import TaskActions from "./TaskActions/index.jsx";
+import TaskList from "./TaskList/index.jsx";
 import UserTaskList from "./TaskList/UserTaskList.jsx";
 import ViewTaskModal from "./ViewTaskModal/index#1.jsx";
 
@@ -155,7 +155,12 @@ const TaskBoard = () => {
               onView={handleView}
               onDelete={handleDeltePost}
             />
-            <UserTaskList />
+            <UserTaskList
+              tasks={data}
+              onEdit={handleEditTask}
+              onView={handleView}
+              onDelete={handleDeltePost}
+            />
           </div>
         </div>
       </section>
