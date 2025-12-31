@@ -1,4 +1,6 @@
+import { FaRegUser } from "react-icons/fa";
 import { IoMdLogIn, IoMdNotifications } from "react-icons/io";
+
 import Logo from "../../assets/ph-logo-en.png";
 
 const Header = () => {
@@ -27,6 +29,11 @@ const Header = () => {
             <a href="">
               <IoMdLogIn className="text-2xl hover:text-[#00D991] transition" />
             </a>
+          </li>
+          <li>
+            <button>
+              <FaRegUser className="text-xl hover:text-[#00D991] transition" />
+            </button>
           </li>
         </ul>
       </div>

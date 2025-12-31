@@ -7,9 +7,9 @@ import { createPost } from "../FetchData/PostData.js";
 import { updatePost } from "../FetchData/UpdateData.js";
 import AddTaskModal from "./AddTaskModal";
 import SearchBox from "./SearchBox";
-import TaskActions from "./TaskActions/index.jsx";
 // import TaskList from "./TaskList/index.jsx";
-import UserTaskList from "./TaskList/UserTaskList.jsx";
+import TaskActions from "./TaskActions/index.jsx";
+import TaskList from "./TaskList/TaskList.jsx";
 import ViewTaskModal from "./ViewTaskModal/index#1.jsx";
 
 const TaskBoard = () => {
@@ -147,15 +147,9 @@ const TaskBoard = () => {
             <SearchBox />
           </div>
           {/**-- Search Box Ends --*/}
-          <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
-            <TaskActions onAddTask={() => setShowTaskModal(true)} />
-            {/* <TaskList
-              tasks={data}
-              onEdit={handleEditTask}
-              onView={handleView}
-              onDelete={handleDeltePost}
-            /> */}
-            <UserTaskList
+          <div className=" bg-[#1D212B]w-full mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
+            <TaskActions onAddClick={() => setShowTaskModal(true)} />
+            <TaskList
               tasks={data}
               onEdit={handleEditTask}
               onView={handleView}

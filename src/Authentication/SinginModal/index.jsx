@@ -1,8 +1,9 @@
 import { Eye, EyeOff, X } from "lucide-react"; // Added 'X' icon
 import { useState } from "react";
 import brandLogo from "../../assets/ph-logo-en.png";
+import { signinWithEmailPassword, singInWithGoogle } from "../auth";
 
-const signinModal = ({ onClose, showCourseModal }) => {
+const SigninModal = ({ onClose, showCourseModal }) => {
   // State for email and password input values
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,21 +12,30 @@ const signinModal = ({ onClose, showCourseModal }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   // A dummy function for the login action
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    await signinWithEmailPassword(email, password);
+    alert(email);
     console.log("Logging in with:", { email, password });
+    console.log(email, password);
     // In a real app, you would make an API call here
   };
 
   // A dummy function for the Google login action
-  const handleGoogleLogin = () => {
+  const handleGoogleLogin = async () => {
     console.log("Initiating Google login...");
     // In a real app, you would initiate the Google Auth flow here
-    showCourseModal();
+    try {
+      const user = await singInWithGoogle();
+      console.log(user);
+      // showCourseModal();
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-900 font-sans p-4">
+    <div className="flex items-center justify-center min-h-screen bg-gray-900 font-sans p-4 mt-10">
       {/* Login Card Container */}
       <div className="relative w-full max-w-md bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-700">
         {/* Close Button */}
@@ -46,7 +56,7 @@ const signinModal = ({ onClose, showCourseModal }) => {
         />
 
         {/* Login Form */}
-        <form onSubmit={handleLogin} className="space-y-6">
+        <form className="space-y-6">
           {/* Email Input Field */}
           <div>
             <label
@@ -109,6 +119,7 @@ const signinModal = ({ onClose, showCourseModal }) => {
           <button
             type="submit"
             className="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-200"
+            onClick={() => handleLogin}
           >
             Log In
           </button>
@@ -157,4 +168,4 @@ const signinModal = ({ onClose, showCourseModal }) => {
   );
 };
 
-export default signinModal;
+export default SigninModal;

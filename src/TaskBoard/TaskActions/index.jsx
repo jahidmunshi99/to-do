@@ -1,19 +1,35 @@
-const TaskActions = ({ onAddTask }) => {
+import { FaPlus } from "react-icons/fa";
+import { IoMdContact } from "react-icons/io";
+import { IoSettingsOutline } from "react-icons/io5";
+const TaskActions = ({ onAddClick }) => {
   return (
-    <div className="mb-14 items-center justify-between sm:flex">
-      <h2 className="text-2xl font-semibold max-sm:mb-4">Tasks Board</h2>
-      <div className="flex items-center space-x-5">
-        <button
-          onClick={onAddTask}
-          className="rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold"
-        >
-          Add Task
-        </button>
-        <button className="rounded-md bg-red-500 px-3.5 py-2.5 text-sm font-semibold">
-          Delete All
-        </button>
+    <>
+      {/* <!-- Profile Card --> */}
+      <div className=" text-black gap-4 shadow h-fit flex flex-col justify-between order-2 md:order-1 rounded border border-[rgba(206,206,206,0.12)] p-2">
+        <div className="bg-white rounded md:p-1 sm:p-2 flex flex-col items-center text-center">
+          <IoMdContact className="text-6xl text-gray-500" />
+          <h2 className="font-bold text-lg">Admin</h2>
+          <p className="text-gray-500 text-sm mb-4">Team Leader</p>
+        </div>
+        <div className="bg-white rounded md:p-6 sm:p-2">
+          <button
+            className="!bg-black w-full flex items-center gap-3 hover:bg-blue-500 text-white py-2 rounded my-2 text-left px-4"
+            onClick={onAddClick}
+          >
+            <FaPlus />
+            Add New Task
+          </button>
+          <button className="!bg-black w-full flex items-center gap-3 hover:bg-blue-500 text-white py-2 rounded my-2 text-left px-4">
+            <FaPlus />
+            Add User
+          </button>
+          <button className="!bg-black w-full flex items-center gap-3 hover:bg-blue-500 text-white py-2 rounded my-2 text-left px-4">
+            <IoSettingsOutline />
+            Settings
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

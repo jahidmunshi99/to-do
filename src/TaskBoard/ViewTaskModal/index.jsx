@@ -4,7 +4,10 @@ import { MdOutlineMarkEmailUnread } from "react-icons/md";
 const viewTaskModal = () => {
   return (
     <>
-      <section className="py-25" id="tasks">
+      <section
+        className="fixed inset-0 z-20 flex items-start justify-center bg-gray-500/80 overflow-y-auto mt-20"
+        id="tasks"
+      >
         <div className="container">
           <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-5 md:px-9 md:py-16">
             <div>
