@@ -10,17 +10,19 @@ const SigninModal = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   // A dummy function for the login action
-  const handleEmailLogin = async (e) => {
-    e.preventDefault();
-    await loginWithEmail(email, password);
+  const handleEmailLogin = async () => {
+    try {
+      await loginWithEmail(email, password);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // A dummy function for the Google login action
   const handleGoogleLogin = async () => {
     // In a real app, you would initiate the Google Auth flow here
     try {
-      const user = await loginWithGoogle();
-      console.log(user);
+      await loginWithGoogle();
     } catch (error) {
       alert(error.message);
     }
@@ -98,9 +100,9 @@ const SigninModal = () => {
 
           {/* Login Button */}
           <button
-            type="submit"
+            type="button"
             className="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-200"
-            onClick={() => handleEmailLogin}
+            onClick={handleEmailLogin}
           >
             Log In
           </button>

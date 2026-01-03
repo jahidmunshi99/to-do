@@ -9,7 +9,7 @@ const AllRoutes = () => {
       <Routes>
         <Route path="/" element={<SigninModal />} />
         <Route
-          path="dashboard"
+          path="/dashboard"
           element={
             <PrivateRoute>
               <UserTaskList />

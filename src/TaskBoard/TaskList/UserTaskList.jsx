@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { FaEdit, FaEye } from "react-icons/fa";
 import { IoMdContact } from "react-icons/io";
+import { UseAuth } from "../../Providers/AuthProvider";
 import SearchBox from "../SearchBox/index";
 
 const UserTaskList = ({ onEdit, onView, onDelete }) => {
+  const { user } = UseAuth();
+  console.log(user);
   const [tasks, setTasks] = useState([
     {
       client_id: "1110",
@@ -42,8 +45,16 @@ const UserTaskList = ({ onEdit, onView, onDelete }) => {
             {/* <!-- Profile Card --> */}
             <div className=" text-black bg-white gap-4 shadow h-fit flex flex-col justify-between order-2 md:order-1 rounded border border-[rgba(206,206,206,0.12)] p-2">
               <div className="flex flex-col items-center text-center">
-                <IoMdContact className="text-6xl text-gray-500" />
-                <h2 className="font-bold text-lg">Imran Hossain</h2>
+                {user.photoURL ? (
+                  <img
+                    className="rounded-full border border-b-gray-950 bg-indigo-300"
+                    src={user.photoURL}
+                    alt="image"
+                  />
+                ) : (
+                  <IoMdContact className="text-6xl text-gray-500" />
+                )}
+                <h2 className="font-bold text-lg">{user.displayName}</h2>
                 <p className="text-gray-500 text-sm mb-4">Team Leader</p>
               </div>
 

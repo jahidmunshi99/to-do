@@ -10,7 +10,6 @@ const googleProvider = new GoogleAuthProvider();
 const singInWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, googleProvider);
-    console.log(result.user);
     return result.user;
   } catch (error) {
     console.log(error);
@@ -20,7 +19,6 @@ const singInWithGoogle = async () => {
 const SignInWithEmail = async (email, password) => {
   try {
     const result = await signInWithEmailAndPassword(auth, email, password);
-    console.log(result.user);
     return result.user;
   } catch (error) {
     console.log(error);
