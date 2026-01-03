@@ -1,5 +1,6 @@
 // import { useNavigate } from "react-router";
 import { useNavigate } from "react-router";
+import { DotLoader } from "react-spinners";
 import { UseAuth } from "../Providers/AuthProvider";
 
 const PrivateRoute = ({ children }) => {
@@ -8,7 +9,7 @@ const PrivateRoute = ({ children }) => {
   const { user, loading } = UseAuth();
   console.log(user);
   if (loading) {
-    return <div className="text-center mt-20">Loading...</div>;
+    return <DotLoader color="#57ffa3" />;
   }
 
   return user ? children : navigate("/");

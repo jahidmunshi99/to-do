@@ -8,17 +8,20 @@ import { updatePost } from "../FetchData/UpdateData.js";
 import AddTaskModal from "./AddTaskModal";
 import SearchBox from "./SearchBox";
 // import TaskList from "./TaskList/index.jsx";
+import { DotLoader } from "react-spinners";
+import { UseAuth } from "../Providers/AuthProvider.jsx";
 import TaskActions from "./TaskActions/index.jsx";
 import TaskList from "./TaskList/TaskList.jsx";
 import ViewTaskModal from "./ViewTaskModal/index#1.jsx";
 
 const TaskBoard = () => {
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [taskToUpdate, setTaskToUpdate] = useState(null);
   const [showViewModal, setShowViewModal] = useState(null);
   const [message, setMessage] = useState({ error: false, message: "" });
   const [sign, setSignIn] = useState(true);
+  const { loading, data, setData } = UseAuth();
 
   useEffect(() => {
     const requestDb = async () => {
@@ -130,6 +133,7 @@ const TaskBoard = () => {
   return (
     <>
       <Toaster />
+      {loading && <DotLoader color="#57ffa3" />}
       {showTaskModal && (
         <AddTaskModal
           onSave={handleAddTask}

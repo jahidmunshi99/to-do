@@ -3,6 +3,7 @@ import SigninModal from "../Authentication/SinginModal/index";
 import { AuthProvider } from "../Providers/AuthProvider.jsx";
 import UserTaskList from "../TaskBoard/TaskList/UserTaskList.jsx";
 import PrivateRoute from "./PrivateRoute";
+
 const AllRoutes = () => {
   return (
     <AuthProvider>

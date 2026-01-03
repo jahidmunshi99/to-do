@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { GetPosts } from "../FetchData/getPosts";
 import { SignInWithEmail, singInWithGoogle } from "../Firebase/auth.service";
 
 const AuthContext = createContext(null);
@@ -8,7 +9,12 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState({
+    error: false,
+    msg: "",
+  });
   const [usersData, setUsersData] = useState([]);
 
   {
@@ -18,6 +24,8 @@ export const AuthProvider = ({ children }) => {
     const fetchUsers = async () => {
       try {
         const users = await axios.get("https://phdb-api.onrender.com/users");
+        const dbPosts = await GetPosts();
+        setData(dbPosts);
         setUsersData(users.data);
       } catch (error) {
         console.log(error);
@@ -27,23 +35,28 @@ export const AuthProvider = ({ children }) => {
     fetchUsers();
   }, []);
 
+  console.log(message);
   {
     /** Get Users Email */
   }
-  const userEmail = usersData.map((item) => item.email);
-  console.log(userEmail);
 
   const loginWithGoogle = async (email, password) => {
     setLoading(true);
     try {
       const result = await singInWithGoogle(email, password);
-      setUser(result);
       const correntUser = usersData.find((item) => item.email === result.email);
       if (correntUser) {
+        setUser(result);
         navigate("/dashboard");
+      } else {
+        setUser(null);
+        setMessage({
+          error: true,
+          msg: "Sorry You are not Registered in Our Server",
+        });
       }
     } catch (error) {
-      console.log(error);
+      setMessage({ error: true, msg: error });
     } finally {
       setLoading(false);
     }
@@ -53,14 +66,19 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       const result = await SignInWithEmail(email, password);
-      setUser(result);
-      console.log(result);
       const correntUser = usersData.find((item) => item.email === result.email);
       if (correntUser) {
+        setUser(result);
         navigate("/dashboard");
+      } else {
+        setUser(null);
+        setMessage({
+          error: false,
+          msg: "Sorry You are not Registered!",
+        });
       }
     } catch (error) {
-      console.log(error);
+      setMessage({ error: true, msg: error });
     } finally {
       setLoading(false);
     }
@@ -68,7 +86,17 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, loginWithGoogle, loginWithEmail, usersData }}
+      value={{
+        user,
+        loading,
+        loginWithGoogle,
+        loginWithEmail,
+        usersData,
+        message,
+        setMessage,
+        data,
+        setData,
+      }}
     >
       {children}
     </AuthContext.Provider>

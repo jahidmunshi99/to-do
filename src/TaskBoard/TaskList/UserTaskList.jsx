@@ -1,40 +1,41 @@
-import { useState } from "react";
 import { FaEdit, FaEye } from "react-icons/fa";
 import { IoMdContact } from "react-icons/io";
+import { DotLoader } from "react-spinners";
 import { UseAuth } from "../../Providers/AuthProvider";
 import SearchBox from "../SearchBox/index";
 
 const UserTaskList = ({ onEdit, onView, onDelete }) => {
-  const { user } = UseAuth();
+  const { data, user, loading } = UseAuth();
   console.log(user);
-  const [tasks, setTasks] = useState([
-    {
-      client_id: "1110",
-      delivery_file: ["epub", "Paperback"],
-      delivery_date: "12/12/2025",
-      order_status: "delivered",
-    },
-    {
-      client_id: "5555",
-      delivery_file: ["epub", "Paperback"],
-      delivery_date: "12/12/2025",
-      order_status: "revision",
-    },
-    {
-      client_id: "1422",
-      delivery_file: ["epub", "Paperback"],
-      delivery_date: "12/12/2025",
-      order_status: "new",
-    },
-    {
-      client_id: "12",
-      delivery_file: ["epub", "Paperback"],
-      delivery_date: "12/12/2025",
-      order_status: "new",
-    },
-  ]);
+  // const [tasks, setTasks] = useState([
+  //   {
+  //     client_id: "1110",
+  //     delivery_file: ["epub", "Paperback"],
+  //     delivery_date: "12/12/2025",
+  //     order_status: "delivered",
+  //   },
+  //   {
+  //     client_id: "5555",
+  //     delivery_file: ["epub", "Paperback"],
+  //     delivery_date: "12/12/2025",
+  //     order_status: "revision",
+  //   },
+  //   {
+  //     client_id: "1422",
+  //     delivery_file: ["epub", "Paperback"],
+  //     delivery_date: "12/12/2025",
+  //     order_status: "new",
+  //   },
+  //   {
+  //     client_id: "12",
+  //     delivery_file: ["epub", "Paperback"],
+  //     delivery_date: "12/12/2025",
+  //     order_status: "new",
+  //   },
+  // ]);
   return (
     <>
+      {loading && <DotLoader color="#57ffa3" />}
       <section className="py-25" id="tasks">
         <div className="container">
           {/**-- Search Box --*/}
@@ -82,7 +83,7 @@ const UserTaskList = ({ onEdit, onView, onDelete }) => {
             <div className="md:col-span-3 bg-transparent text-black order-1 md:order-2 rounded border border-[rgba(206,206,206,0.12)] p-4">
               <div className="flex justify-between items-center mb-4 bg-white text-black p-4 border-0 rounded">
                 <h2 className="font-bold text-lg">
-                  Active orders - ({tasks.length})
+                  Active orders - ({data.length})
                 </h2>
                 <select className="border rounded px-2 py-1">
                   <option>Active orders (7)</option>
@@ -94,7 +95,7 @@ const UserTaskList = ({ onEdit, onView, onDelete }) => {
               {/* { Task Lists} */}
               <div className="space-y-4 ">
                 {/* <!-- Order Item --> */}
-                {tasks.map((task) => {
+                {data.map((task) => {
                   return (
                     <div
                       key={task}
