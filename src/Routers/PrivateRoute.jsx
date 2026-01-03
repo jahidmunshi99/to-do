@@ -1,11 +1,14 @@
-import { Navigate } from "react-dom";
-import { useAuth } from "../Providers/AuthProvider";
+// import { useNavigate } from "react-router";
+import { Navigate } from "react-router";
+import { UseAuth } from "../Providers/AuthProvider";
 
 const PrivateRoute = ({ children }) => {
-  const { user, loading } = useAuth();
+  // const navigate = useNavigate();
+  const { user, loading } = UseAuth();
+  console.log(user);
   if (loading) {
     return <div className="text-center mt-20">Loading...</div>;
   }
-  return user ? children : <Navigate to="/signin" replace />;
+  return user ? children : <Navigate to="/" />;
 };
 export default PrivateRoute;

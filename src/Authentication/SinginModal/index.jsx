@@ -1,34 +1,26 @@
-import { Eye, EyeOff, X } from "lucide-react"; // Added 'X' icon
+import { Eye, EyeOff } from "lucide-react"; // Added 'X' icon
 import { useState } from "react";
 import brandLogo from "../../assets/ph-logo-en.png";
-import { signinWithEmailPassword, singInWithGoogle } from "../auth";
+import { UseAuth } from "../../Providers/AuthProvider";
 
-const SigninModal = ({ onClose, showCourseModal }) => {
-  // State for email and password input values
+const SigninModal = () => {
+  const { loginWithGoogle, loginWithEmail } = UseAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  // State to toggle password visibility
   const [showPassword, setShowPassword] = useState(false);
 
   // A dummy function for the login action
-  const handleLogin = async (e) => {
+  const handleEmailLogin = async (e) => {
     e.preventDefault();
-    await signinWithEmailPassword(email, password);
-    alert(email);
-    console.log("Logging in with:", { email, password });
-    console.log(email, password);
-    // In a real app, you would make an API call here
+    await loginWithEmail(email, password);
   };
 
   // A dummy function for the Google login action
   const handleGoogleLogin = async () => {
-    console.log("Initiating Google login...");
     // In a real app, you would initiate the Google Auth flow here
     try {
-      const user = await singInWithGoogle();
+      const user = await loginWithGoogle();
       console.log(user);
-      // showCourseModal();
     } catch (error) {
       alert(error.message);
     }
@@ -38,21 +30,10 @@ const SigninModal = ({ onClose, showCourseModal }) => {
     <div className="flex items-center justify-center min-h-screen bg-gray-900 font-sans p-4 mt-10">
       {/* Login Card Container */}
       <div className="relative w-full max-w-md bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-700">
-        {/* Close Button */}
-        <button
-          onClick={() => {
-            onClose();
-          }}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white transition duration-200 cursor-pointer"
-          aria-label="Close"
-        >
-          <X size={20} />
-        </button>
-
         <img
           className="w-[160px] mx-auto border-1 rounded-4xl p-2 text-white mb-6"
           src={brandLogo}
-          alt=""
+          alt="logo"
         />
 
         {/* Login Form */}
@@ -119,7 +100,7 @@ const SigninModal = ({ onClose, showCourseModal }) => {
           <button
             type="submit"
             className="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-200"
-            onClick={() => handleLogin}
+            onClick={() => handleEmailLogin}
           >
             Log In
           </button>
