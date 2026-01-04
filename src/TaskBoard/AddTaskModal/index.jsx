@@ -12,14 +12,14 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
       order_status: "",
       platform: "",
       service_type: "",
-      client_category: "",
-      total_orders: "",
       budget: "",
       note: [],
       delivery_date: "",
       delivery_file: [],
+      is_order_complete: false,
       handle_by: "",
       createdBy: "",
+      createdAt: new Date().toISOString(),
     }
   );
 
@@ -110,21 +110,6 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
                   <option value="web development">Web Development</option>
                 </select>
               </div>
-
-              <div className="space-y-2">
-                <label>Total Order</label>
-                <input
-                  type="number"
-                  name="total_orders"
-                  onChange={handleChange}
-                  value={task.total_orders}
-                  className="w-full rounded-md bg-[#2D323F] px-3 py-2.5"
-                />
-              </div>
-            </div>
-
-            {/* Row 4 */}
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
               <div className="space-y-2">
                 <label>Budget</label>
                 <input
@@ -134,7 +119,10 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
                   className="w-full rounded-md bg-[#2D323F] px-3 py-2.5"
                 />
               </div>
+            </div>
 
+            {/* Row 4 */}
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
               <div className="space-y-2">
                 <label>Order Status</label>
                 <select
@@ -143,39 +131,11 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
                   onChange={handleChange}
                   className="w-full rounded-md bg-[#2D323F] px-3 py-2.5"
                 >
-                  <option value="active">Active</option>
+                  <option value="new">Active</option>
                   <option value="revision">Revision</option>
                   <option value="delivered">Delivered</option>
                   <option value="cancelled">Cancelled</option>
                 </select>
-              </div>
-
-              <div className="space-y-2">
-                <label>Client Category</label>
-                <select
-                  name="client_category"
-                  value={task.client_category}
-                  onChange={handleChange}
-                  className="w-full rounded-md bg-[#2D323F] px-3 py-2.5"
-                >
-                  <option value="vip">VIP</option>
-                  <option value="new">New</option>
-                  <option value="regular">Regular</option>
-                  <option value="old">Old</option>
-                </select>
-              </div>
-            </div>
-
-            {/* Row 5 */}
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-              <div className="space-y-2">
-                <label>Delivery File</label>
-                <textarea
-                  name="delivery_file"
-                  onChange={handleChange}
-                  value={task.delivery_file}
-                  className="w-full rounded-md bg-[#2D323F] max-h-[40px] px-3 "
-                />
               </div>
 
               <div className="space-y-2">
@@ -188,9 +148,8 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
                   className="w-full rounded-md bg-[#2D323F] px-3 py-2"
                 />
               </div>
-
               <div className="space-y-2">
-                <label>Team Member</label>
+                <label>Handle By</label>
                 <select
                   name="handle_by"
                   value={task.handle_by}
@@ -204,15 +163,28 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
               </div>
             </div>
 
+            {/* Row 5 */}
+            <div className="grid grid-cols-1 gap-5">
+              <div className="space-y-2">
+                <label>Delivery File</label>
+                <textarea
+                  name="delivery_file"
+                  onChange={handleChange}
+                  value={task.delivery_file}
+                  className="w-full rounded-md bg-[#2D323F] max-h-[40px] px-3 "
+                />
+              </div>
+            </div>
+
             {/** Book Information */}
             <div className="flex flex-col gap-5 md:flex-row">
               <div className="w-full space-y-2">
                 <label>Book Title</label>
                 <input
                   type="text"
-                  name="client_id"
+                  name="book_title"
                   onChange={handleChange}
-                  value={task.client_id}
+                  value={task.book_title}
                   className="w-full rounded-md bg-[#2D323F] px-3 py-2"
                 />
               </div>
@@ -221,9 +193,9 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
                 <label>Author Name</label>
                 <input
                   type="text"
-                  name="client_name"
+                  name="author_name"
                   onChange={handleChange}
-                  value={task.client_name}
+                  value={task.author_name}
                   className="w-full rounded-md bg-[#2D323F] px-3 py-2"
                 />
               </div>

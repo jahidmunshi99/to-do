@@ -18,7 +18,7 @@ const AllRoutes = () => {
       <Routes>
         <Route path="/" element={<SigninModal />} />
         <Route
-          path="/dashboard/:userRole"
+          path="/dashboard/"
           element={
             <PrivateRoute>
               <DashBoardWrapper />
