@@ -38,8 +38,7 @@ const UserTaskList = ({ onEdit, onView, onDelete }) => {
                 <h3 className="font-semibold mb-2">Level overview</h3>
                 <ul className="text-sm text-gray-600 space-y-1">
                   <li className="text-center">
-                    <span className="font-semibold">eMail:</span>{" "}
-                    imranhossain@gmail.com
+                    <span className="font-semibold">eMail:</span> {user.email}
                   </li>
                   <li>
                     <span className="font-semibold">Success score:</span> 9
