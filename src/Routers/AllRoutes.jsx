@@ -1,8 +1,16 @@
 import { Route, Routes } from "react-router";
 import SigninModal from "../Authentication/SinginModal/index";
-import { AuthProvider } from "../Providers/AuthProvider.jsx";
-import UserTaskList from "../TaskBoard/TaskList/UserTaskList.jsx";
+import { AuthProvider, UseAuth } from "../Providers/AuthProvider.jsx";
+import TaskBoard from "../TaskBoard";
+import UserTaskList from "../TaskBoard/TaskList/UserTaskList";
 import PrivateRoute from "./PrivateRoute";
+
+const DashBoardWrapper = () => {
+  const { userRole } = UseAuth();
+  return userRole === "admin" ? <TaskBoard /> : <UserTaskList />;
+};
+
+// const { userRole } = UseAuth();
 
 const AllRoutes = () => {
   return (
@@ -10,19 +18,14 @@ const AllRoutes = () => {
       <Routes>
         <Route path="/" element={<SigninModal />} />
         <Route
-          path="/dashboard"
+          path="/dashboard/:userRole"
           element={
             <PrivateRoute>
-              <UserTaskList />
+              <DashBoardWrapper />
             </PrivateRoute>
           }
         />
         <Route path="*" element={<SigninModal />} />
-
-        {/* <Route element={<AuthLayout />}> */}
-        {/* <Route path="login" element={<SigninModal />} /> */}
-        {/* <Route path="register" element={<Register />} /> */}
-        {/* </Route> */}
       </Routes>
     </AuthProvider>
   );

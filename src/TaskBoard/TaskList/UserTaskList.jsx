@@ -7,32 +7,7 @@ import SearchBox from "../SearchBox/index";
 const UserTaskList = ({ onEdit, onView, onDelete }) => {
   const { data, user, loading } = UseAuth();
   console.log(user);
-  // const [tasks, setTasks] = useState([
-  //   {
-  //     client_id: "1110",
-  //     delivery_file: ["epub", "Paperback"],
-  //     delivery_date: "12/12/2025",
-  //     order_status: "delivered",
-  //   },
-  //   {
-  //     client_id: "5555",
-  //     delivery_file: ["epub", "Paperback"],
-  //     delivery_date: "12/12/2025",
-  //     order_status: "revision",
-  //   },
-  //   {
-  //     client_id: "1422",
-  //     delivery_file: ["epub", "Paperback"],
-  //     delivery_date: "12/12/2025",
-  //     order_status: "new",
-  //   },
-  //   {
-  //     client_id: "12",
-  //     delivery_file: ["epub", "Paperback"],
-  //     delivery_date: "12/12/2025",
-  //     order_status: "new",
-  //   },
-  // ]);
+
   return (
     <>
       {loading && <DotLoader color="#57ffa3" />}

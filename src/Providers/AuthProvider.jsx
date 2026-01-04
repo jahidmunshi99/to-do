@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [data, setData] = useState([]);
+  const [userRole, setUserRole] = useState(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({
     error: false,
@@ -35,7 +36,8 @@ export const AuthProvider = ({ children }) => {
     fetchUsers();
   }, []);
 
-  console.log(message);
+  console.log(userRole);
+
   {
     /** Get Users Email */
   }
@@ -45,6 +47,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const result = await singInWithGoogle(email, password);
       const correntUser = usersData.find((item) => item.email === result.email);
+      setUserRole(correntUser?.role || null);
       if (correntUser) {
         setUser(result);
         navigate("/dashboard");
@@ -67,6 +70,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const result = await SignInWithEmail(email, password);
       const correntUser = usersData.find((item) => item.email === result.email);
+      setUserRole(correntUser?.role || null);
       if (correntUser) {
         setUser(result);
         navigate("/dashboard");
@@ -96,6 +100,7 @@ export const AuthProvider = ({ children }) => {
         setMessage,
         data,
         setData,
+        userRole,
       }}
     >
       {children}
