@@ -7,6 +7,7 @@ import SearchBox from "../SearchBox/index";
 const UserTaskList = ({ onEdit, onView, onDelete }) => {
   const { data, user, loading } = UseAuth();
   console.log(user);
+  console.log(data);
 
   return (
     <>
@@ -30,7 +31,9 @@ const UserTaskList = ({ onEdit, onView, onDelete }) => {
                 ) : (
                   <IoMdContact className="text-6xl text-gray-500" />
                 )}
-                <h2 className="font-bold text-lg">{user.displayName}</h2>
+                <h2 className="font-bold text-lg">
+                  {user?.displayName || "Imran Hossain"}
+                </h2>
                 <p className="text-gray-500 text-sm mb-4">Team Leader</p>
               </div>
 
