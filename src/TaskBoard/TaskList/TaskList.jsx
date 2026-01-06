@@ -38,7 +38,7 @@ const TaskList = ({ tasks, onEdit, onView, onDelete }) => {
                     <div className="lg:text-left md:text-center">
                       <p className="font-semibold">
                         <span>ID: </span>
-                        {task.client_id} | {task.client_name}
+                        {task?.client_id} | {task?.client_name}
                       </p>
                       <div className="text-gray-500 text-sm">
                         <span className="font-semibold text-black mr-2">
@@ -46,7 +46,7 @@ const TaskList = ({ tasks, onEdit, onView, onDelete }) => {
                         </span>
 
                         <div className="inline-flex flex-wrap gap-1 my-1">
-                          {task.delivery_file.map((item, index) => (
+                          {task?.delivery_file?.map((item, index) => (
                             <span
                               key={index}
                               className="bg-gray-800 text-white px-2 py-1 rounded text-xs"
@@ -61,22 +61,22 @@ const TaskList = ({ tasks, onEdit, onView, onDelete }) => {
                         <span className="font-semibold text-black">
                           Delivery :
                         </span>{" "}
-                        {task.delivery_date}
+                        {task?.delivery_date}
                       </p>
                     </div>
                   </div>
                   <div className="flex flex-col md:flex-row items-center gap-3 mt-2 md:mt-0 ">
-                    {task.order_status === "new" && (
+                    {task?.order_status === "new" && (
                       <span className="bg-blue-500 text-white px-2 py-1 rounded text-xs">
                         ACTIVE
                       </span>
                     )}
-                    {task.order_status === "revision" && (
+                    {task?.order_status === "revision" && (
                       <span className="bg-red-500 text-white px-2 py-1 rounded text-xs">
                         REVISION
                       </span>
                     )}
-                    {task.order_status === "delivered" && (
+                    {task?.order_status === "delivered" && (
                       <span className="bg-cyan-700 text-white px-2 py-1 rounded text-xs">
                         DELIVERED
                       </span>

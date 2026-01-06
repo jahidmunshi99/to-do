@@ -90,7 +90,7 @@ const UserTaskList = ({ onEdit, onView, onDelete }) => {
                               Type:
                             </span>
 
-                            <div className="inline-flex flex-wrap gap-1 my-1">
+                            {/* <div className="inline-flex flex-wrap gap-1 my-1">
                               {task.delivery_file.map((item, index) => (
                                 <span
                                   key={index}
@@ -99,7 +99,7 @@ const UserTaskList = ({ onEdit, onView, onDelete }) => {
                                   {item}
                                 </span>
                               ))}
-                            </div>
+                            </div> */}
                           </div>
 
                           <p className="text-red-500 text-sm">

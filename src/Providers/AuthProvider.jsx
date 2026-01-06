@@ -1,7 +1,8 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { GetPosts } from "../FetchData/getPosts";
+import { getPosts } from "../FetchData/getPosts";
+import { createPost } from "../FetchData/PostData";
 import { SignInWithEmail, singInWithGoogle } from "../Firebase/auth.service";
 
 const AuthContext = createContext(null);
@@ -25,18 +26,27 @@ export const AuthProvider = ({ children }) => {
     const fetchUsers = async () => {
       try {
         const users = await axios.get("https://phdb-api.onrender.com/users");
-        const dbPosts = await GetPosts();
-        setData(dbPosts);
+        // const dbPosts = await GetPosts();
+
+        // setData(dbPosts);
         setUsersData(users.data);
       } catch (error) {
         console.log(error);
       }
     };
 
+    const testResult = async () => {
+      const result = await getPosts();
+      setData(result);
+      return result;
+    };
+
+    testResult();
+
     fetchUsers();
   }, []);
 
-  console.log(userRole);
+  console.log(data);
 
   {
     /** Get Users Email */
@@ -101,6 +111,7 @@ export const AuthProvider = ({ children }) => {
         data,
         setData,
         userRole,
+        createPost,
       }}
     >
       {children}

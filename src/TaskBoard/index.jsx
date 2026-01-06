@@ -1,9 +1,7 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import SignModal from "../Authentication/SinginModal/index.jsx";
 import { deletePost } from "../FetchData/DeleteData.js";
-import { createPost } from "../FetchData/PostData.js";
 import { updatePost } from "../FetchData/UpdateData.js";
 import AddTaskModal from "./AddTaskModal";
 import SearchBox from "./SearchBox";
@@ -21,18 +19,18 @@ const TaskBoard = () => {
   const [showViewModal, setShowViewModal] = useState(null);
   const [message, setMessage] = useState({ error: false, message: "" });
   const [sign, setSignIn] = useState(true);
-  const { loading, data, setData } = UseAuth();
+  const { loading, data, setData, createPost } = UseAuth();
 
   useEffect(() => {
-    const requestDb = async () => {
-      try {
-        const res = await axios.get("https://phdb-api.onrender.com/posts");
-        setData(res.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    requestDb();
+    // const requestDb = async () => {
+    //   try {
+    //     const res = await axios.get("https://phdb-api.onrender.com/posts");
+    //     setData(res.data);
+    //   } catch (error) {
+    //     console.error("Error fetching data:", error);
+    //   }
+    // };
+    // requestDb();
 
     if (!message.message) return;
     message.error
