@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
   const [task, setTask] = useState(
     taskToUpdate || {
@@ -28,6 +29,7 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
   function handleChange(e) {
     const name = e.target.name;
     let value = e.target.value;
+
     if (name === "delivery_file") {
       value = value.split(",");
     }

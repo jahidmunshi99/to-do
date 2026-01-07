@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import SignModal from "../Authentication/SinginModal/index.jsx";
 import { deletePost } from "../FetchData/DeleteData.js";
-import { updatePost } from "../FetchData/UpdateData.js";
+// import { updatePost } from "../FetchData/UpdateData.js";
+import { updatePost } from "../FetchData/updatePosts.js";
 import AddTaskModal from "./AddTaskModal";
 import SearchBox from "./SearchBox";
 // import TaskList from "./TaskList/index.jsx";
@@ -42,10 +43,11 @@ const TaskBoard = () => {
     try {
       if (isNew) {
         const res = await createPost(newTask);
-        setData((prev) => [...prev, res.data]);
+        setData((prev) => [...prev, res.newTask]);
         setMessage({ error: false, message: "Successfully Added" });
       } else {
         await updatePost(newTask.id, newTask);
+        console.log(newTask.id);
         setData(
           data.map((task) => {
             if (task.id === newTask.id) {
