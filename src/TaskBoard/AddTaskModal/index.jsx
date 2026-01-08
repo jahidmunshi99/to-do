@@ -136,6 +136,7 @@ const AddTaskModal = ({ onSave, taskToUpdate, onClose }) => {
                   <option value="new">Active</option>
                   <option value="revision">Revision</option>
                   <option value="delivered">Delivered</option>
+                  <option value="completed">Completed</option>
                   <option value="cancelled">Cancelled</option>
                 </select>
               </div>

@@ -26,8 +26,6 @@ const getPosts = async () => {
       id: doc.id,
       ...doc.data(),
     }));
-
-    console.log("Firestore data:", result);
     return result;
   } catch (error) {
     console.error("Firestore error:", error);

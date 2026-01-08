@@ -1,33 +1,44 @@
 import { FaEdit, FaEye } from "react-icons/fa";
 import { IoMdContact } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
+import { UseAuth } from "../../Providers/AuthProvider";
 
-const TaskList = ({ tasks, onEdit, onView, onDelete }) => {
-  console.log(tasks);
+const TaskList = ({ onEdit, onView, onDelete }) => {
+  const { data } = UseAuth();
+  {
+    /** Task Filtering */
+  }
+  const avialabeTasks = data.filter(
+    (item) => item.order_status !== "completed"
+  );
+  const isNew = data.filter((item) => item.order_status === "new");
+  const isRevision = data.filter((item) => item.order_status === "revision");
+  const isDelivered = data.filter((item) => item.order_status === "delivered");
   return (
     <>
       {/* <!-- Active Orders --> */}
       <div className="md:col-span-3 bg-transparent text-black order-1 md:order-2 rounded border border-[rgba(206,206,206,0.12)] p-4">
         <div className="flex justify-between items-center mb-4 bg-white text-black p-4 border-0 rounded">
           <h2 className="font-bold text-lg">
-            Active orders - ({tasks.length})
+            Active orders - ({avialabeTasks.length})
           </h2>
           <select className="border rounded px-2 py-1">
-            <option>Active orders (7)</option>
-            <option>In Revision (5)</option>
-            <option>Delivered (15)</option>
+            <option>Active orders ({avialabeTasks.length})</option>
+            <option>New orders ({isNew.length})</option>
+            <option>In Revision ({isRevision.length})</option>
+            <option>Delivered ({isDelivered.length})</option>
           </select>
         </div>
 
         {/* { Task Lists} */}
-        {tasks.length == 0 ? (
+        {data.length == 0 ? (
           <div className="text-green-500 text-center py-10 text-xl">
             No Task Yet
           </div>
         ) : (
           <div className="space-y-4 ">
             {/* <!-- Order Item --> */}
-            {tasks?.map((task, index) => {
+            {avialabeTasks?.map((task, index) => {
               return (
                 <div
                   key={index}
@@ -67,7 +78,7 @@ const TaskList = ({ tasks, onEdit, onView, onDelete }) => {
                   </div>
                   <div className="flex flex-col md:flex-row items-center gap-3 mt-2 md:mt-0 ">
                     {task?.order_status === "new" && (
-                      <span className="bg-blue-500 text-white px-2 py-1 rounded text-xs">
+                      <span className="bg-fuchsia-800 text-white px-2 py-1 rounded text-xs">
                         ACTIVE
                       </span>
                     )}

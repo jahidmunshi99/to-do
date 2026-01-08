@@ -10,6 +10,7 @@ function App() {
       {/* <HeroSection /> */}
       {/* <TaskBoard /> */}
       {/* <Outlet /> */}
+      {/* <DotLoader color="#57ffa3" /> */}
       <AllRoutes />
       <Footer />
     </div>

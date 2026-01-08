@@ -42,8 +42,8 @@ const TaskBoard = () => {
   const handleAddTask = async (newTask, isNew) => {
     try {
       if (isNew) {
-        const res = await createPost(newTask);
-        setData((prev) => [...prev, res.newTask]);
+        await createPost(newTask);
+        setData((prev) => [...prev, newTask]);
         setMessage({ error: false, message: "Successfully Added" });
       } else {
         await updatePost(newTask.id, newTask);

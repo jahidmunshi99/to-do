@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
     msg: "",
   });
   const [usersData, setUsersData] = useState([]);
+  const [search, setSearch] = useState(null);
 
   {
     /* Fetch Users Inforation from DB */
@@ -42,11 +43,8 @@ export const AuthProvider = ({ children }) => {
     };
 
     testResult();
-
     fetchUsers();
   }, []);
-
-  console.log(data);
 
   {
     /** Get Users Email */
@@ -112,6 +110,8 @@ export const AuthProvider = ({ children }) => {
         setData,
         userRole,
         createPost,
+        search,
+        setSearch,
       }}
     >
       {children}
