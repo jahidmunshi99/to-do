@@ -22,7 +22,7 @@ const UserTaskList = ({ onEdit, onView, onDelete }) => {
             {/* <!-- Profile Card --> */}
             <div className=" text-black bg-white gap-4 shadow h-fit flex flex-col justify-between order-2 md:order-1 rounded border border-[rgba(206,206,206,0.12)] p-2">
               <div className="flex flex-col items-center text-center">
-                {user.photoURL ? (
+                {user?.photoURL ? (
                   <img
                     className="rounded-full border border-b-gray-950 bg-indigo-300"
                     src={user.photoURL}
@@ -41,7 +41,7 @@ const UserTaskList = ({ onEdit, onView, onDelete }) => {
                 <h3 className="font-semibold mb-2">Level overview</h3>
                 <ul className="text-sm text-gray-600 space-y-1">
                   <li className="text-center">
-                    <span className="font-semibold">eMail:</span> {user.email}
+                    <span className="font-semibold">eMail:</span> {user?.email}
                   </li>
                   <li>
                     <span className="font-semibold">Success score:</span> 9

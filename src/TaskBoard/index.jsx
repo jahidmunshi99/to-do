@@ -154,7 +154,6 @@ const TaskBoard = () => {
           <div className=" bg-[#1D212B]w-full mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
             <TaskActions onAddClick={() => setShowTaskModal(true)} />
             <TaskList
-              tasks={data}
               onEdit={handleEditTask}
               onView={handleView}
               onDelete={handleDeltePost}

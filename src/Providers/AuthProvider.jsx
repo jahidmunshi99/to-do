@@ -1,8 +1,8 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { createPost } from "../FetchData/createPost";
 import { getPosts } from "../FetchData/getPosts";
-import { createPost } from "../FetchData/PostData";
 import { SignInWithEmail, singInWithGoogle } from "../Firebase/auth.service";
 
 const AuthContext = createContext(null);
@@ -26,6 +26,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
+        // const users = await getUsers();
         const users = await axios.get("https://phdb-api.onrender.com/users");
         // const dbPosts = await GetPosts();
 

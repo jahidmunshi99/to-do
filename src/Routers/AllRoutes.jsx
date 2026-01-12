@@ -17,14 +17,9 @@ const AllRoutes = () => {
     <AuthProvider>
       <Routes>
         <Route path="/" element={<SigninModal />} />
-        <Route
-          path="/dashboard/"
-          element={
-            <PrivateRoute>
-              <DashBoardWrapper />
-            </PrivateRoute>
-          }
-        />
+        <Route element={<PrivateRoute />}>
+          <Route path="/dashboard" element={<DashBoardWrapper />} />
+        </Route>
         <Route path="*" element={<SigninModal />} />
       </Routes>
     </AuthProvider>

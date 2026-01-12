@@ -33,4 +33,24 @@ const getPosts = async () => {
   }
 };
 
-export { getPosts };
+const getUsers = async () => {
+  try {
+    const querySnapshot = await getDocs(collection(db, "users"));
+
+    if (querySnapshot.empty) {
+      console.log("No documents found!");
+      return [];
+    }
+
+    const result = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    return result;
+  } catch (error) {
+    console.error("Firestore error:", error);
+    return [];
+  }
+};
+
+export { getPosts, getUsers };

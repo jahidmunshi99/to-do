@@ -1,7 +1,7 @@
 import { IoSearch } from "react-icons/io5";
 import { UseAuth } from "../../Providers/AuthProvider";
 const SearchBox = () => {
-  const { data, search, setSearch } = UseAuth();
+  const { data, setData, search, setSearch } = UseAuth();
 
   const handleSearch = () => {
     if (!data) return;
@@ -9,6 +9,8 @@ const SearchBox = () => {
       (item) => item.client_name === search || item.client_id === search
     );
     setSearch(searchResult);
+    console.log(searchResult);
+    setData(searchResult);
   };
   return (
     <section>
