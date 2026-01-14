@@ -3,13 +3,13 @@ import { UseAuth } from "../../Providers/AuthProvider";
 const TaskList = ({ onEdit, onView, onDelete }) => {
   const { data, search, loading } = UseAuth();
 
-  const avialabeTasks = data.filter(
-    (item) => item.order_status !== "completed"
-  );
+  // const avialabeTasks = data.filter(
+  //   (item) => item.order_status !== "completed"
+  // );
   const isNew = data.filter((item) => item.order_status === "new");
   const isRevision = data.filter((item) => item.order_status === "revision");
   const isDelivered = data.filter((item) => item.order_status === "delivered");
-  const taskList = search && search.length > 0 ? search : avialabeTasks;
+  const taskList = search && search.length > 0 ? search : data;
   return (
     <>
       {/* <!-- Active Orders --> */}

@@ -50,6 +50,11 @@ const TaskItem = ({ task, onView, onEdit, onDelete }) => {
               DELIVERED
             </span>
           )}
+          {task?.order_status === "completed" && (
+            <span className="bg-pink-600 text-white px-2 py-1 rounded text-xs">
+              COMPLETED
+            </span>
+          )}
           <div className="flex gap-4 md:gap-3 md:ml-5">
             <button
               href="#"
