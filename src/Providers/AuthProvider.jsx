@@ -1,8 +1,7 @@
-import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { createPost } from "../FetchData/createPost";
-import { getPosts } from "../FetchData/getPosts";
+import { getPosts, getUsers } from "../FetchData/getPosts";
 import { SignInWithEmail, singInWithGoogle } from "../Firebase/auth.service";
 
 const AuthContext = createContext(null);
@@ -18,33 +17,39 @@ export const AuthProvider = ({ children }) => {
     msg: "",
   });
   const [usersData, setUsersData] = useState([]);
-  const [search, setSearch] = useState(null);
 
   {
     /* Fetch Users Inforation from DB */
   }
   useEffect(() => {
+    setLoading(true);
     const fetchUsers = async () => {
       try {
-        // const users = await getUsers();
-        const users = await axios.get("https://phdb-api.onrender.com/users");
-        // const dbPosts = await GetPosts();
-
-        // setData(dbPosts);
-        setUsersData(users.data);
+        const users = await getUsers();
+        console.log(users);
+        setUsersData(users);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
     const testResult = async () => {
-      const result = await getPosts();
-      setData(result);
-      return result;
+      setLoading(true);
+      try {
+        const result = await getPosts();
+        setData(result);
+        return result;
+      } catch (error) {
+        error(error);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    testResult();
     fetchUsers();
+    testResult();
   }, []);
 
   {
@@ -55,7 +60,9 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       const result = await singInWithGoogle(email, password);
-      const correntUser = usersData.find((item) => item.email === result.email);
+      const correntUser = usersData.find(
+        (item) => item.email === result.user_email
+      );
       setUserRole(correntUser?.role || null);
       if (correntUser) {
         setUser(result);
@@ -77,18 +84,33 @@ export const AuthProvider = ({ children }) => {
   const loginWithEmail = async (email, password) => {
     setLoading(true);
     try {
+      let users = usersData;
+
+      if (users.length === 0) {
+        users = await getUsers();
+        setUsersData(users);
+      }
+
       const result = await SignInWithEmail(email, password);
-      const correntUser = usersData.find((item) => item.email === result.email);
-      setUserRole(correntUser?.role || null);
-      if (correntUser) {
-        setUser(result);
-        navigate("/dashboard");
-      } else {
+      const correntUser = usersData.find(
+        (item) => item.email === result.user_email
+      );
+
+      if (!correntUser) {
         setUser(null);
+        setUserRole(null);
         setMessage({
-          error: false,
-          msg: "Sorry You are not Registered!",
+          error: true,
+          msg: "Sorry, You are not registered!",
         });
+        return;
+      }
+      setUser(result);
+      setUserRole(correntUser.role);
+      if (result.email === "jahidmunshi99@gmail.com") {
+        navigate("/dashboard/admin");
+      } else {
+        navigate(`/dashboard/user/${correntUser.id}`);
       }
     } catch (error) {
       setMessage({ error: true, msg: error });
@@ -111,8 +133,6 @@ export const AuthProvider = ({ children }) => {
         setData,
         userRole,
         createPost,
-        search,
-        setSearch,
       }}
     >
       {children}

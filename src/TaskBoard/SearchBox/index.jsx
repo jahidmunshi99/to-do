@@ -1,16 +1,32 @@
-import { IoSearch } from "react-icons/io5";
+import { useState } from "react";
+import { IoClose, IoSearch } from "react-icons/io5";
+import { getPosts } from "../../FetchData/getPosts";
 import { UseAuth } from "../../Providers/AuthProvider";
-const SearchBox = () => {
-  const { data, setData, search, setSearch } = UseAuth();
 
+const SearchBox = () => {
+  const { data, setData } = UseAuth();
+  const [search, setSearch] = useState(null);
+  const [isSearch, setIsSearch] = useState(true);
+
+  if (isSearch.length > 0) {
+    setIsSearch(false);
+  }
+  console.log(search);
   const handleSearch = () => {
     if (!data) return;
+    setIsSearch(false);
+
     const searchResult = data.filter(
       (item) => item.client_name === search || item.client_id === search
     );
-    setSearch(searchResult);
-    console.log(searchResult);
     setData(searchResult);
+  };
+
+  const handleSearchClose = async () => {
+    setIsSearch(true);
+    setSearch("");
+    const result = await getPosts();
+    setData(result);
   };
   return (
     <section>
@@ -27,13 +43,23 @@ const SearchBox = () => {
               placeholder="Search Task"
               required
             />
-            <button
-              type="button"
-              className="absolute right-2 top-0 h-full rounded-e-lg text-white md:right-4"
-              onClick={handleSearch}
-            >
-              <IoSearch />
-            </button>
+            {isSearch ? (
+              <button
+                onClick={handleSearch}
+                type="button"
+                className="absolute right-2 top-0 h-full rounded-e-lg text-white md:right-4"
+              >
+                <IoSearch />
+              </button>
+            ) : (
+              <button
+                onClick={handleSearchClose}
+                type="button"
+                className="absolute right-2 top-0 h-full rounded-e-lg text-white md:right-4"
+              >
+                <IoClose />
+              </button>
+            )}
           </div>
         </div>
       </form>

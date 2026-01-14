@@ -20,7 +20,7 @@ const TaskBoard = () => {
   const [showViewModal, setShowViewModal] = useState(null);
   const [message, setMessage] = useState({ error: false, message: "" });
   const [sign, setSignIn] = useState(true);
-  const { loading, data, setData, createPost } = UseAuth();
+  const { loading, data, setLoading, setData, createPost } = UseAuth();
 
   useEffect(() => {
     // const requestDb = async () => {
@@ -62,6 +62,8 @@ const TaskBoard = () => {
       setShowTaskModal(false);
     } catch (error) {
       setMessage({ error: true, message: `${error}` });
+    } finally {
+      setLoading(false);
     }
   };
 

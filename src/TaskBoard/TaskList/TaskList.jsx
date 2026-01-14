@@ -1,8 +1,7 @@
 import TaskItem from "../../Components/TaskItem";
 import { UseAuth } from "../../Providers/AuthProvider";
-
 const TaskList = ({ onEdit, onView, onDelete }) => {
-  const { data, search } = UseAuth();
+  const { data, search, loading } = UseAuth();
 
   const avialabeTasks = data.filter(
     (item) => item.order_status !== "completed"

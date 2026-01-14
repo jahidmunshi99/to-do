@@ -72,10 +72,10 @@ const UserTaskList = ({ onEdit, onView, onDelete }) => {
               {/* { Task Lists} */}
               <div className="space-y-4 ">
                 {/* <!-- Order Item --> */}
-                {data.map((task) => {
+                {data.map((task, index) => {
                   return (
                     <div
-                      key={task}
+                      key={index}
                       className="flex flex-col md:flex-row justify-between md:items-center bg-gray-50 px-4 py-3 rounded"
                     >
                       <div className="flex flex-col md:flex-row items-center gap-3">
