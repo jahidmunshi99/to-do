@@ -1,13 +1,27 @@
-import { FaEdit, FaEye } from "react-icons/fa";
+import { useState } from "react";
+import { FaEye } from "react-icons/fa";
+import { HiDotsVertical } from "react-icons/hi";
 import { IoMdContact } from "react-icons/io";
 import { DotLoader } from "react-spinners";
+import { updateOrderStatus } from "../../FetchData/updatePosts";
 import { UseAuth } from "../../Providers/AuthProvider";
 import SearchBox from "../SearchBox/index";
 
-const UserTaskList = ({ onEdit, onView, onDelete }) => {
-  const { data, user, loading } = UseAuth();
-  console.log(user);
-  console.log(data);
+const UserTaskList = ({ onView }) => {
+  const { data, setData, user, loading } = UseAuth();
+
+  const [taskToDeliver, setTaskToDeliver] = useState(null);
+
+  const handleEdit = (e) => {
+    setTaskToDeliver(e);
+  };
+
+  const handleOrderStatus = async (docId, deliveryStatus) => {
+    await updateOrderStatus(docId, deliveryStatus);
+    setTaskToDeliver(null);
+    setData(data);
+    console.log(deliveryStatus);
+  };
 
   return (
     <>
@@ -60,7 +74,7 @@ const UserTaskList = ({ onEdit, onView, onDelete }) => {
             <div className="md:col-span-3 bg-transparent text-black order-1 md:order-2 rounded border border-[rgba(206,206,206,0.12)] p-4">
               <div className="flex justify-between items-center mb-4 bg-white text-black p-4 border-0 rounded">
                 <h2 className="font-bold text-lg">
-                  Active orders - ({data.length})
+                  Active orders - ({data?.length})
                 </h2>
                 <select className="border rounded px-2 py-1">
                   <option>Active orders (7)</option>
@@ -70,7 +84,7 @@ const UserTaskList = ({ onEdit, onView, onDelete }) => {
               </div>
 
               {/* { Task Lists} */}
-              <div className="space-y-4 ">
+              <div className="space-y-4 relative">
                 {/* <!-- Order Item --> */}
                 {data.map((task, index) => {
                   return (
@@ -90,7 +104,7 @@ const UserTaskList = ({ onEdit, onView, onDelete }) => {
                               Type:
                             </span>
 
-                            {/* <div className="inline-flex flex-wrap gap-1 my-1">
+                            <div className="inline-flex flex-wrap gap-1 my-1">
                               {task.delivery_file.map((item, index) => (
                                 <span
                                   key={index}
@@ -99,7 +113,7 @@ const UserTaskList = ({ onEdit, onView, onDelete }) => {
                                   {item}
                                 </span>
                               ))}
-                            </div> */}
+                            </div>
                           </div>
 
                           <p className="text-red-500 text-sm">
@@ -110,7 +124,7 @@ const UserTaskList = ({ onEdit, onView, onDelete }) => {
                           </p>
                         </div>
                       </div>
-                      <div className="flex flex-col md:flex-row items-center gap-3 mt-2 md:mt-0 ">
+                      <div className="flex flex-col md:flex-row items-center gap-3 mt-2 md:mt-0">
                         {task.order_status === "new" && (
                           <span className="bg-blue-500 text-white px-2 py-1 rounded text-xs">
                             ACTIVE
@@ -126,6 +140,11 @@ const UserTaskList = ({ onEdit, onView, onDelete }) => {
                             DELIVERED
                           </span>
                         )}
+                        {task.order_status === "completed" && (
+                          <span className="bg-fuchsia-700 text-white px-2 py-1 rounded text-xs">
+                            COMPLETED
+                          </span>
+                        )}
                         <div className="flex gap-4 md:gap-3 md:ml-5">
                           <button
                             href="#"
@@ -134,15 +153,34 @@ const UserTaskList = ({ onEdit, onView, onDelete }) => {
                           >
                             <FaEye className="text-xl hover:text-blue-500" />
                           </button>
-                          <button
-                            onClick={() => {
-                              onEdit();
-                            }}
-                          >
-                            <FaEdit className="text-xl text-green-500 hover:text-black" />
+                          <button onClick={() => handleEdit(task.id)}>
+                            <HiDotsVertical className="text-xl hover:text-green-500" />
                           </button>
                         </div>
                       </div>
+                      {/** Action Panel */}
+                      {taskToDeliver === task.id && (
+                        <div className="absolute right-10 w-[150px]  text-center py-3 rounded border border-gray-700 bg-gray-800">
+                          <ul className="text-white w-full">
+                            <li
+                              className="hover:bg-gray-600 hover:text-white text-sm w-full px-2 cursor-pointer"
+                              onClick={() => {
+                                handleOrderStatus(task.id, "delivered");
+                              }}
+                            >
+                              Delivered
+                            </li>
+                            <li
+                              className="hover:bg-gray-600 hover:text-white text-sm w-full px-2 mt-1 cursor-pointer"
+                              onClick={() => {
+                                handleOrderStatus(task.id, "revision");
+                              }}
+                            >
+                              Revision
+                            </li>
+                          </ul>
+                        </div>
+                      )}
                     </div>
                   );
                 })}
