@@ -55,6 +55,11 @@ const TaskItem = ({ task, onView, onEdit, onDelete }) => {
               COMPLETED
             </span>
           )}
+          {task?.order_status === "awaiting_to_review" && (
+            <span className="bg-amber-600 text-white px-2 py-1 rounded text-xs uppercase">
+              Awaiting To Review
+            </span>
+          )}
           <div className="flex gap-4 md:gap-3 md:ml-5">
             <button
               href="#"
