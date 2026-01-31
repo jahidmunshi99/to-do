@@ -3,13 +3,32 @@ import { UseAuth } from "../../Providers/AuthProvider";
 const TaskList = ({ onEdit, onView, onDelete }) => {
   const { data, search, loading } = UseAuth();
 
+  // const [tasks, setTasks] = useState([]);
+
+  let taskList = [];
+  console.log(taskList);
+
+  const statusOrder = ["awaiting_review", "new", "revision", "delivered"];
+
+  if (search && search.length > 0) {
+    taskList = search;
+  } else {
+    const items = data.filter((item) => item.order_status !== "completed");
+    taskList = items;
+  }
+
+  taskList.sort(
+    (a, b) =>
+      statusOrder.indexOf(a.order_status) - statusOrder.indexOf(b.order_status),
+  );
+
   // const avialabeTasks = data.filter(
   //   (item) => item.order_status !== "completed"
   // );
   const isNew = data.filter((item) => item.order_status === "new");
   const isRevision = data.filter((item) => item.order_status === "revision");
   const isDelivered = data.filter((item) => item.order_status === "delivered");
-  const taskList = search && search.length > 0 ? search : data;
+
   return (
     <>
       {/* <!-- Active Orders --> */}

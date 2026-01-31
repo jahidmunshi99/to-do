@@ -54,7 +54,7 @@ const TaskBoard = () => {
               return newTask;
             }
             return task;
-          })
+          }),
         );
         setMessage({ error: false, message: "Successfully Updated" });
       }
@@ -113,7 +113,7 @@ const TaskBoard = () => {
         </div>
         // </div>
       ),
-      { duration: Infinity }
+      { duration: Infinity },
     );
   };
 

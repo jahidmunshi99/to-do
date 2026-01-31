@@ -1,8 +1,13 @@
+import { getAuth } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { createPost } from "../FetchData/createPost";
 import { getPosts, getUsers } from "../FetchData/getPosts";
-import { SignInWithEmail, singInWithGoogle } from "../Firebase/auth.service";
+import {
+  logOut,
+  SignInWithEmail,
+  singInWithGoogle,
+} from "../Firebase/auth.service";
 
 const AuthContext = createContext(null);
 
@@ -61,7 +66,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const result = await singInWithGoogle(email, password);
       const correntUser = usersData.find(
-        (item) => item.email === result.user_email
+        (item) => item.email === result.user_email,
       );
       setUserRole(correntUser?.role || null);
       if (correntUser) {
@@ -93,7 +98,7 @@ export const AuthProvider = ({ children }) => {
 
       const result = await SignInWithEmail(email, password);
       const correntUser = usersData.find(
-        (item) => item.email === result.user_email
+        (item) => item.email === result.user_email,
       );
 
       if (!correntUser) {
@@ -119,6 +124,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const signOut = async () => {
+    const auth = getAuth();
+    await logOut(auth);
+    navigate("/");
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -133,6 +144,7 @@ export const AuthProvider = ({ children }) => {
         setData,
         userRole,
         createPost,
+        signOut,
       }}
     >
       {children}

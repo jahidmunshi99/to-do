@@ -28,10 +28,14 @@ const TaskItem = ({ task, onView, onEdit, onDelete }) => {
               </div>
             </div>
 
-            <p className="text-red-500 text-sm">
-              <span className="font-semibold text-black">Delivery :</span>{" "}
-              {task?.delivery_date}
-            </p>
+            <div>
+              <span className="text-black text-sm font-semibold">
+                Delivery :
+              </span>{" "}
+              <span className="text-red-500 font-semibold">
+                {task?.delivery_date}
+              </span>
+            </div>
           </div>
         </div>
         <div className="flex flex-col md:flex-row items-center gap-3 mt-2 md:mt-0 ">

@@ -1,17 +1,19 @@
 import { FaRegUser } from "react-icons/fa";
 import { IoMdLogIn, IoMdNotifications } from "react-icons/io";
-
+import { Link } from "react-router";
 import Logo from "../../assets/ph-logo-en.png";
+import { UseAuth } from "../../Providers/AuthProvider";
 
 const Header = () => {
+  const { signOut } = UseAuth();
   return (
     <nav className="py-4 md:py-4 fixed top-0 w-full !bg-[#252a34] z-50">
       <div className="container mx-auto flex items-center justify-between gap-x-6">
         {/* Logo */}
         <div>
-          <a href="/">
+          <Link>
             <img className="h-[45px]" src={Logo} alt="Lws" />
-          </a>
+          </Link>
         </div>
         {/* Menu */}
         <ul className="flex justify-between gap-4 items-center">
@@ -26,9 +28,9 @@ const Header = () => {
           </li>
 
           <li>
-            <a href="">
+            <Link to="/" onClick={signOut}>
               <IoMdLogIn className="text-2xl hover:text-[#00D991] transition" />
-            </a>
+            </Link>
           </li>
           <li>
             <button>
