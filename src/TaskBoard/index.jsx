@@ -7,6 +7,7 @@ import { updatePost } from "../FetchData/updatePosts.js";
 import AddTaskModal from "./AddTaskModal";
 import SearchBox from "./SearchBox";
 // import TaskList from "./TaskList/index.jsx";
+import { useNavigate } from "react-router";
 import { DotLoader } from "react-spinners";
 import { UseAuth } from "../Providers/AuthProvider.jsx";
 import TaskActions from "./TaskActions/index.jsx";
@@ -21,6 +22,7 @@ const TaskBoard = () => {
   const [message, setMessage] = useState({ error: false, message: "" });
   const [sign, setSignIn] = useState(true);
   const { loading, data, setLoading, setData, createPost } = UseAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // const requestDb = async () => {
@@ -128,8 +130,9 @@ const TaskBoard = () => {
     setData(updateData);
   };
 
-  function handleView() {
+  function handleView(id) {
     setShowViewModal(true);
+    navigate(`/dashboard/clients/${id}`);
   }
 
   return (

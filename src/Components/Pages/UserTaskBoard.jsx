@@ -8,16 +8,29 @@ import { updateOrderStatus } from "../../FetchData/updatePosts";
 import { UseAuth } from "../../Providers/AuthProvider";
 import OrderStatus from "../common/OrderStatus";
 import SearchBar from "../common/SearchBar";
+import ProjectInfo from "../MessagePopup/projectInfo";
 
-const UserTaskBoard = ({ onView }) => {
+const UserTaskBoard = () => {
   const { data, setData, user, loading } = UseAuth();
   const [showActionModal, setShowActionModal] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState(null);
   const [message, setMessage] = useState({ error: false, message: "" });
+  const [showTaskModal, setShowTaskModal] = useState(null);
+  const [taskDetails, setTaskDetails] = useState(null);
+
+  const handleoView = (task) => {
+    console.log(task);
+    setTaskDetails(task);
+    setShowTaskModal(true);
+  };
+
+  const handleClose = () => {
+    setShowTaskModal(null);
+  };
 
   const taskList = data.filter(
     (item) =>
-      item.order_status !== "completed" && item.order_status !== "delivered"
+      item.order_status !== "completed" && item.order_status !== "delivered",
   );
 
   useEffect(() => {
@@ -66,7 +79,7 @@ const UserTaskBoard = ({ onView }) => {
           </div>
         </div>
       ),
-      { duration: Infinity }
+      { duration: Infinity },
     );
   };
 
@@ -93,6 +106,9 @@ const UserTaskBoard = ({ onView }) => {
           <div className="py-5 flex justify-end">
             <SearchBar />
           </div>
+          {showTaskModal && (
+            <ProjectInfo handleClose={handleClose} taskDetails={taskDetails} />
+          )}
           <div className="bg-[#1D212B]w-full mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
             {/* <!-- Profile Card --> */}
             <div className=" text-black bg-white gap-4 shadow h-fit flex flex-col justify-between order-2 md:order-1 rounded border border-[rgba(206,206,206,0.12)] p-2">
@@ -202,12 +218,11 @@ const UserTaskBoard = ({ onView }) => {
                             COMPLETED
                           </span>
                         )}
-
                         <div className="flex gap-4 md:gap-3 md:ml-5">
                           <button
                             href="#"
                             className="text-green-600 font-semibold text-sm"
-                            onClick={() => onView()}
+                            onClick={() => handleoView(task.note)}
                           >
                             <FaEye className="text-xl hover:text-blue-500" />
                           </button>
@@ -226,7 +241,7 @@ const UserTaskBoard = ({ onView }) => {
                                 onClick={() => {
                                   handleOrderStatus(
                                     task.id,
-                                    "awaiting_to_review"
+                                    "awaiting_to_review",
                                   );
                                   setShowActionModal(!showActionModal);
                                 }}
