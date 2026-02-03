@@ -2,7 +2,7 @@ import { FaRegUser } from "react-icons/fa";
 import { IoMdLogIn, IoMdNotifications } from "react-icons/io";
 import { Link } from "react-router";
 import Logo from "../../assets/ph-logo-en.png";
-import { UseAuth } from "../../Providers/AuthProvider";
+import { UseAuth } from "../../contexts/AuthProvider";
 
 const Header = () => {
   const { signOut } = UseAuth();

@@ -1,4 +1,4 @@
-const ConfirmModal = ({
+const ConfirmationPopupModal = ({
   title = "Confirm Action",
   message = "Are you sure you want to continue?",
   onConfirm,
@@ -31,4 +31,4 @@ const ConfirmModal = ({
   );
 };
 
-export default ConfirmModal;
+export default ConfirmationPopupModal;

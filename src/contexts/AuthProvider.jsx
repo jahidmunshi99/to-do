@@ -1,18 +1,26 @@
 import { getAuth } from "firebase/auth";
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import { useNavigate } from "react-router";
 import { createPost } from "../FetchData/createPost";
 import { getPosts, getUsers } from "../FetchData/getPosts";
 import {
-  logOut,
   SignInWithEmail,
+  logOut,
   singInWithGoogle,
 } from "../Firebase/auth.service";
+import { authReducer, initialState } from "./AuthReducer";
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
+  const [state, dispatch] = useReducer(authReducer, initialState);
   const [user, setUser] = useState(null);
   const [data, setData] = useState([]);
   const [userRole, setUserRole] = useState(null);
@@ -66,7 +74,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const result = await singInWithGoogle(email, password);
       const correntUser = usersData.find(
-        (item) => item.email === result.user_email,
+        (item) => item.email === result.user_email
       );
       setUserRole(correntUser?.role || null);
       if (correntUser) {
@@ -98,7 +106,7 @@ export const AuthProvider = ({ children }) => {
 
       const result = await SignInWithEmail(email, password);
       const correntUser = usersData.find(
-        (item) => item.email === result.user_email,
+        (item) => item.email === result.user_email
       );
 
       if (!correntUser) {
@@ -145,6 +153,8 @@ export const AuthProvider = ({ children }) => {
         userRole,
         createPost,
         signOut,
+        state,
+        dispatch,
       }}
     >
       {children}

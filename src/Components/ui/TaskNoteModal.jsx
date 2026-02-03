@@ -16,8 +16,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export default function ProjectInfo({ handleClose, taskDetails }) {
-  console.log(taskDetails);
+export default function TaskNoteModal({ handleClose, taskDetails }) {
   return (
     <React.Fragment>
       <BootstrapDialog

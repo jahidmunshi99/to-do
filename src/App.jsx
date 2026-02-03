@@ -1,8 +1,8 @@
-import Footer from "./Components/Footer";
-import Header from "./Components/Header/index";
-import { AuthProvider } from "./Providers/AuthProvider";
+import Footer from "./Components/layout/Footer";
+import Header from "./Components/layout/Header";
 
-import AllRoutes from "./Routers/AllRoutes";
+import { AuthProvider } from "./contexts/AuthProvider";
+import AppRoute from "./routes/AppRoute";
 // import TaskBoard from "./TaskBoard";
 // import { Outlet } from "react-router";
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <div className="bg-[#191D26] font-[Inter] min-h-screen text-white">
       <AuthProvider>
         <Header />
-        <AllRoutes />
+        <AppRoute />
         <Footer />
       </AuthProvider>
     </div>

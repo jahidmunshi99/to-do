@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router";
 import SigninModal from "../Authentication/SinginModal/index";
-import ClientsProfile from "../Components/Pages/Buyer/ClientsProfile";
-import UserTaskBoard from "../Components/Pages/UserTaskBoard";
+import ClientsProfile from "../Pages/Buyer/ClientsProfile";
+import UserTaskBoard from "../Pages/UserTaskBoard";
 import TaskBoard from "../TaskBoard";
 import PrivateRoute from "./PrivateRoute";
 
-const AllRoutes = () => {
+const AppRoute = () => {
   return (
     <Routes>
       <Route path="/" element={<SigninModal />} />
@@ -19,4 +19,4 @@ const AllRoutes = () => {
   );
 };
 
-export default AllRoutes;
+export default AppRoute;

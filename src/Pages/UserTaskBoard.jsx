@@ -4,11 +4,11 @@ import { FaEye } from "react-icons/fa";
 import { HiDotsVertical } from "react-icons/hi";
 import { IoMdContact } from "react-icons/io";
 import { DotLoader } from "react-spinners";
-import { updateOrderStatus } from "../../FetchData/updatePosts";
-import { UseAuth } from "../../Providers/AuthProvider";
-import OrderStatus from "../common/OrderStatus";
-import SearchBar from "../common/SearchBar";
-import ProjectInfo from "../MessagePopup/projectInfo";
+import { updateOrderStatus } from "../FetchData/updatePosts";
+import OrderStatus from "../components/common/OrderStatus";
+import SearchBar from "../components/common/SearchBar";
+import TaskNoteModal from "../components/ui/TaskNoteModal";
+import { UseAuth } from "../contexts/AuthProvider";
 
 const UserTaskBoard = () => {
   const { data, setData, user, loading } = UseAuth();
@@ -30,7 +30,7 @@ const UserTaskBoard = () => {
 
   const taskList = data.filter(
     (item) =>
-      item.order_status !== "completed" && item.order_status !== "delivered",
+      item.order_status !== "completed" && item.order_status !== "delivered"
   );
 
   useEffect(() => {
@@ -79,7 +79,7 @@ const UserTaskBoard = () => {
           </div>
         </div>
       ),
-      { duration: Infinity },
+      { duration: Infinity }
     );
   };
 
@@ -107,7 +107,10 @@ const UserTaskBoard = () => {
             <SearchBar />
           </div>
           {showTaskModal && (
-            <ProjectInfo handleClose={handleClose} taskDetails={taskDetails} />
+            <TaskNoteModal
+              handleClose={handleClose}
+              taskDetails={taskDetails}
+            />
           )}
           <div className="bg-[#1D212B]w-full mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
             {/* <!-- Profile Card --> */}
@@ -241,7 +244,7 @@ const UserTaskBoard = () => {
                                 onClick={() => {
                                   handleOrderStatus(
                                     task.id,
-                                    "awaiting_to_review",
+                                    "awaiting_to_review"
                                   );
                                   setShowActionModal(!showActionModal);
                                 }}

@@ -68,7 +68,7 @@ const TaskItem = ({ task, onView, onEdit, onDelete }) => {
             <button
               href="#"
               className="text-green-600 font-semibold text-sm"
-              onClick={() => onView(task.id)}
+              onClick={() => onView({ type: "SHOW_MODAL" })}
             >
               <FaEye className="text-xl hover:text-blue-500" />
             </button>

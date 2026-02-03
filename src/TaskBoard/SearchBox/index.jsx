@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IoClose, IoSearch } from "react-icons/io5";
 import { getPosts } from "../../FetchData/getPosts";
-import { UseAuth } from "../../Providers/AuthProvider";
+import { UseAuth } from "../../contexts/AuthProvider";
 
 const SearchBox = () => {
   const { data, setData } = UseAuth();

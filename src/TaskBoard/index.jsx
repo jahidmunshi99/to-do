@@ -9,7 +9,7 @@ import SearchBox from "./SearchBox";
 // import TaskList from "./TaskList/index.jsx";
 import { useNavigate } from "react-router";
 import { DotLoader } from "react-spinners";
-import { UseAuth } from "../Providers/AuthProvider.jsx";
+import { UseAuth } from "../contexts/AuthProvider.jsx";
 import TaskActions from "./TaskActions/index.jsx";
 import TaskList from "./TaskList/TaskList.jsx";
 import ViewTaskModal from "./ViewTaskModal/index#1.jsx";
@@ -18,10 +18,11 @@ const TaskBoard = () => {
   // const [data, setData] = useState([]);
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [taskToUpdate, setTaskToUpdate] = useState(null);
-  const [showViewModal, setShowViewModal] = useState(null);
+  // const [showViewModal, setShowViewModal] = useState(null);
   const [message, setMessage] = useState({ error: false, message: "" });
   const [sign, setSignIn] = useState(true);
-  const { loading, data, setLoading, setData, createPost } = UseAuth();
+  const { loading, data, setLoading, setData, createPost, state, dispatch } =
+    UseAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -56,7 +57,7 @@ const TaskBoard = () => {
               return newTask;
             }
             return task;
-          }),
+          })
         );
         setMessage({ error: false, message: "Successfully Updated" });
       }
@@ -115,7 +116,7 @@ const TaskBoard = () => {
         </div>
         // </div>
       ),
-      { duration: Infinity },
+      { duration: Infinity }
     );
   };
 
@@ -148,7 +149,7 @@ const TaskBoard = () => {
       )}
 
       {!sign && <SignModal />}
-      {showViewModal && <ViewTaskModal onClose={handleClose} task={data} />}
+      {state.showModal && <ViewTaskModal onClose={handleClose} task={data} />}
       <section className="py-25" id="tasks">
         <div className="container">
           {/**-- Search Box --*/}
@@ -160,7 +161,7 @@ const TaskBoard = () => {
             <TaskActions onAddClick={() => setShowTaskModal(true)} />
             <TaskList
               onEdit={handleEditTask}
-              onView={handleView}
+              onView={dispatch}
               onDelete={handleDeltePost}
             />
           </div>

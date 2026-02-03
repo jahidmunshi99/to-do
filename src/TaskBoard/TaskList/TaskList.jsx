@@ -1,5 +1,6 @@
 import TaskItem from "../../Components/TaskItem";
-import { UseAuth } from "../../Providers/AuthProvider";
+import { UseAuth } from "../../contexts/AuthProvider";
+
 const TaskList = ({ onEdit, onView, onDelete }) => {
   const { data, search, loading } = UseAuth();
 
@@ -19,7 +20,7 @@ const TaskList = ({ onEdit, onView, onDelete }) => {
 
   taskList.sort(
     (a, b) =>
-      statusOrder.indexOf(a.order_status) - statusOrder.indexOf(b.order_status),
+      statusOrder.indexOf(a.order_status) - statusOrder.indexOf(b.order_status)
   );
 
   // const avialabeTasks = data.filter(

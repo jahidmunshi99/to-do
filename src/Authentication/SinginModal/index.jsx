@@ -2,7 +2,7 @@ import { Eye, EyeOff } from "lucide-react"; // Added 'X' icon
 import { useState } from "react";
 import { DotLoader } from "react-spinners";
 import brandLogo from "../../assets/ph-logo-en.png";
-import { UseAuth } from "../../Providers/AuthProvider";
+import { UseAuth } from "../../contexts/AuthProvider";
 
 const SigninModal = () => {
   const { loginWithGoogle, loginWithEmail, message, loading, setMessage } =
